@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="INFO">
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="[%-5level] %d{yyyy-MM-dd HH:mm:ss.SSS} [%class{10}] - %msg%n" />
+    </Console>
+  </Appenders>
+  <Loggers>
+    <Logger name="de.algoristic.automata" level="debug" additivity="false">
+      <AppenderRef ref="console" />
+    </Logger>
+    <Root level="error" additivity="false">
+      <AppenderRef ref="console" />
+    </Root>
+  </Loggers>
+</Configuration>
