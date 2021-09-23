@@ -1,46 +1,105 @@
 package de.algoristic.automata.evt.print;
 
 import java.awt.Color;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.nio.file.Path;
+import java.util.List;
+import javax.imageio.ImageIO;
+import de.algoristic.automata.core.Cell;
+import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
 
-public abstract class Printer implements AutomatonEventListener<FinishAutomationEvent> {
+public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
 
-  protected final Path path;
-  protected final Color backgroundColor;
-  protected final Color cellColor;
+  final private Path path;
+  final private Color backgroundColor;
+  final private Color aliveCellColor;
+  final private Color deadCellColor;
+  final private int size;
+  final private int border;
 
-  public Printer(Path path, Color backgroundColor, Color cellColor) {
+  public Printer(Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border) {
     this.path = path;
     this.backgroundColor = backgroundColor;
-    this.cellColor = cellColor;
+    this.aliveCellColor = aliveCellColor;
+    this.deadCellColor = deadCellColor;
+    this.size = size;
+    this.border = border;
   }
 
-  public Path getPath() {
-    return path;
-  }
-
-  public Color getBackgroundColor() {
-    return backgroundColor;
-  }
-
-  public Color getCellColor() {
-    return cellColor;
-  }
-
-  public abstract static class Builder {
-
-    protected final Path path;
-    protected Color backgroundColor = Color.white;
-    protected Color cellColor = Color.black;
-
-    protected Builder(Path path) {
-      this.path = path;
+  @Override
+  public void on(FinishAutomationEvent event) {
+    int rule = event.getRule();
+    List<Generation> generations = event.getGenerations();
+    int numberOfCells = generations.get(0).size();
+    int amountOfGenerations = generations.size() - 1;
+    BufferedImage image = getImage(numberOfCells, amountOfGenerations);
+    int[] alive = getRgbArray(true);
+    int[] dead = getRgbArray(false);
+    for (int y = 0; y < amountOfGenerations; y++) {
+      Generation generation = generations.get(y);
+      for (int x = 0; x < numberOfCells; x++) {
+        Cell cell = generation.get(x);
+        int startX = calcStart(x);
+        int startY = calcStart(y);
+        int[] color;
+        if (cell.isAlive()) {
+          color = alive;
+        } else {
+          color = dead;
+        }
+        image.setRGB(startX, startY, size, size, color, 0, 0);
+      }
     }
+    Path imagePath = path.resolve("rule_" + rule + ".gif");
+    File imageFile = imagePath.toFile();
+    try {
+      ImageIO.write(image, "gif", imageFile);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
 
-    public static StaticPrinterBuilder staticPrinter(Path path) {
-      return new StaticPrinterBuilder(path);
+  private int calcStart(int n) {
+    return ((n * size) + ((n + 1) * border));
+  }
+
+  private int[] getRgbArray(boolean alive) {
+    Color color;
+    if(alive) {
+      color = aliveCellColor;
+    } else {
+      color = deadCellColor;
+    }
+    int rgb = color.getRGB();
+    int[] rgbArray = new int[size];
+    for (int i = 0; i < rgbArray.length; i++) {
+      rgbArray[i] = rgb;
+    }
+    return rgbArray;
+  }
+
+  private BufferedImage getImage(int numberOfCells, int amountOfGenerations) {
+    int width = (numberOfCells * size) + (numberOfCells * border);
+    int height = (amountOfGenerations * size) + (numberOfCells * border);
+    BufferedImage image = Images.getColoredImage(width, height, backgroundColor);
+    return image;
+  }
+
+  public static class Builder {
+
+    private final Path path;
+    private Color backgroundColor = Color.lightGray;
+    private Color aliveCellColor = Color.black;
+    private Color deadCellColor = Color.white;
+    private int size = 8;
+    private int border = 1;
+    private int scaling = 1;
+
+    public Builder(Path path) {
+      this.path = path;
     }
 
     public Builder withBackgroundColor(Color backgroundColor) {
@@ -48,44 +107,35 @@ public abstract class Printer implements AutomatonEventListener<FinishAutomation
       return this;
     }
 
-    public Builder withCellColor(Color cellColor) {
-      this.cellColor = cellColor;
+    public Builder withAliveCellColor(Color aliveCellColor) {
+      this.aliveCellColor = aliveCellColor;
       return this;
     }
 
-    public abstract Printer build();
-  }
-
-  public static class StaticPrinterBuilder extends Builder {
-
-    private int size = 4;
-    private int border = 1;
-    private int scaling = 2;
-
-    private StaticPrinterBuilder(Path path) {
-      super(path);
+    public Builder withDeadCellColor(Color deadCellColor) {
+      this.deadCellColor = deadCellColor;
+      return this;
     }
 
-    public StaticPrinterBuilder withCellSize(int size) {
+    public Builder withCellSize(int size) {
       this.size = size;
       return this;
     }
 
-    public StaticPrinterBuilder withBorder(int border) {
+    public Builder withBorder(int border) {
       this.border = border;
       return this;
     }
 
-    public StaticPrinterBuilder withScaling(int scaling) {
+    public Builder withScaling(int scaling) {
       this.scaling = scaling;
       return this;
     }
 
-    @Override
     public Printer build() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new StaticPrinter(path, backgroundColor, cellColor, size, border);
+      return new Printer(path, backgroundColor, aliveCellColor, deadCellColor, size, border);
     }
   }
 }

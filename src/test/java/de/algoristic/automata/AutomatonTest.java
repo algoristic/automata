@@ -13,21 +13,15 @@ public class AutomatonTest {
   static Path chaoticDir = baseDirectory.resolve("chaotic");
   static Path simpleDir = baseDirectory.resolve("simple");
 
-  static Printer chaoticPrinter = Printer
-    .Builder
-    .staticPrinter(chaoticDir)
-    .build();
-  static Printer simplePrinter = Printer
-    .Builder
-    .staticPrinter(simpleDir)
-    .build();
+  static Printer chaoticPrinter = new Printer.Builder(chaoticDir).build();
+  static Printer simplePrinter = new Printer.Builder(simpleDir).build();
 
   static List<Integer> simpleRules = Arrays.asList(18, 22, 26, 30, 45, 60, 73, 75, 82, 86, 90, 101, 102, 105, 109, 110, 124, 126, 129, 135, 137, 146, 149, 150, 153, 154, 161, 165, 167, 169, 181, 182, 193, 195, 210, 214, 218, 225);
   static List<Integer> chaoticRules = Arrays.asList(18, 22, 30, 54, 60, 62, 90, 105, 106, 110, 122, 126, 146, 150);
 
   @Test
   void chaoticTest() {
-    int width = 127;
+    int width = 101;
     int height = width;
     chaoticRules.forEach(rule -> {
       Automaton automaton =
@@ -43,7 +37,7 @@ public class AutomatonTest {
 
   @Test
   void simpleTest() {
-    int width = 151;
+    int width = 101;
     int height = width;
     simpleRules.forEach(rule -> {
       Automaton automaton = 
