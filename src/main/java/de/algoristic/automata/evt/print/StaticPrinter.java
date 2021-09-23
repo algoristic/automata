@@ -12,11 +12,13 @@ import de.algoristic.automata.evt.FinishAutomationEvent;
 
 class StaticPrinter extends Printer {
 
-  final private int scale;
+  final private int size;
+  final private int border;
 
-  StaticPrinter(Path path, Color backgroundColor, Color cellColor, int scale) {
+  StaticPrinter(Path path, Color backgroundColor, Color cellColor, int size, int border) {
     super(path, backgroundColor, cellColor);
-    this.scale = scale;
+    this.size = size;
+    this.border = border;
   }
 
   @Override
@@ -25,18 +27,16 @@ class StaticPrinter extends Printer {
     List<Generation> generations = event.getGenerations();
     int numberOfCells = generations.get(0).size();
     int amountOfGenerations = generations.size() - 1;
-    BufferedImage image = Images.getColoredImage(numberOfCells * scale, amountOfGenerations * scale, backgroundColor);
-    int rgb = cellColor.getRGB();
-    int[] rgbArray = new int[scale];
-    for (int i = 0; i < rgbArray.length; i++) {
-      rgbArray[i] = rgb;
-    }
+    BufferedImage image = getImage(numberOfCells, amountOfGenerations);
+    int[] rgbArray = getRgbArray();
     for (int y = 0; y < amountOfGenerations; y++) {
       Generation generation = generations.get(y);
       for (int x = 0; x < numberOfCells; x++) {
         Cell cell = generation.get(x);
         if (cell.isAlive()) {
-          image.setRGB(x * scale, y * scale, scale, scale, rgbArray, 0, 0);
+          int startX = calcStart(x);
+          int startY = calcStart(y);
+          image.setRGB(startX, startY, size, size, rgbArray, 0, 0);
         }
       }
     }
@@ -49,4 +49,23 @@ class StaticPrinter extends Printer {
     }
   }
 
+  private int calcStart(int n) {
+    return ((n * size) + ((n + 1) * border));
+  }
+
+  private int[] getRgbArray() {
+    int rgb = cellColor.getRGB();
+    int[] rgbArray = new int[size];
+    for (int i = 0; i < rgbArray.length; i++) {
+      rgbArray[i] = rgb;
+    }
+    return rgbArray;
+  }
+
+  private BufferedImage getImage(int numberOfCells, int amountOfGenerations) {
+    int width = (numberOfCells * size) + (numberOfCells * border);
+    int height = (amountOfGenerations * size) + (numberOfCells * border);
+    BufferedImage image = Images.getColoredImage(width, height, backgroundColor);
+    return image;
+  }
 }

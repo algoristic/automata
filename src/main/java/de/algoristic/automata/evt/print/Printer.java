@@ -58,20 +58,34 @@ public abstract class Printer implements AutomatonEventListener<FinishAutomation
 
   public static class StaticPrinterBuilder extends Builder {
 
-    private int scale = 1;
+    private int size = 4;
+    private int border = 1;
+    private int scaling = 2;
 
     private StaticPrinterBuilder(Path path) {
       super(path);
     }
 
-    public StaticPrinterBuilder withScale(int scale) {
-      this.scale = scale;
+    public StaticPrinterBuilder withCellSize(int size) {
+      this.size = size;
+      return this;
+    }
+
+    public StaticPrinterBuilder withBorder(int border) {
+      this.border = border;
+      return this;
+    }
+
+    public StaticPrinterBuilder withScaling(int scaling) {
+      this.scaling = scaling;
       return this;
     }
 
     @Override
     public Printer build() {
-      return new StaticPrinter(path, backgroundColor, cellColor, scale);
+      int size = (this.size * scaling);
+      int border = (this.border * scaling);
+      return new StaticPrinter(path, backgroundColor, cellColor, size, border);
     }
   }
 }

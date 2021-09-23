@@ -16,12 +16,10 @@ public class AutomatonTest {
   static Printer chaoticPrinter = Printer
     .Builder
     .staticPrinter(chaoticDir)
-    .withScale(8)
     .build();
   static Printer simplePrinter = Printer
     .Builder
     .staticPrinter(simpleDir)
-    .withScale(8)
     .build();
 
   static List<Integer> simpleRules = Arrays.asList(18, 22, 26, 30, 45, 60, 73, 75, 82, 86, 90, 101, 102, 105, 109, 110, 124, 126, 129, 135, 137, 146, 149, 150, 153, 154, 161, 165, 167, 169, 181, 182, 193, 195, 210, 214, 218, 225);
@@ -29,7 +27,7 @@ public class AutomatonTest {
 
   @Test
   void chaoticTest() {
-    int width = 151;
+    int width = 127;
     int height = width;
     chaoticRules.forEach(rule -> {
       Automaton automaton =
