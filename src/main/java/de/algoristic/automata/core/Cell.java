@@ -15,22 +15,24 @@ public class Cell {
   private final boolean isAlive;
 
   private CellSpace cellSpace;
+  private int age;
 
   public Cell(final char state) {
+    this.age = 0;
     if (ALIVE.equals(state)) {
       isAlive = true;
     } else {
       if (DEAD.equals(state)) {
         isAlive = false;
       } else {
-        throw new AutomatonException(
-            "could not instantiate cell, due to invalid state: \"" + state + "\"");
+        throw new AutomatonException("could not instantiate cell, due to invalid state: \"" + state + "\"");
       }
     }
   }
 
   private Cell(final Cell cell) {
     this.isAlive = cell.isAlive();
+    this.age = cell.getAge();
   }
 
   public Pattern getNeighborhood(Rule appliedRule) {
@@ -58,6 +60,14 @@ public class Cell {
     return isAlive;
   }
 
+  public int getAge() {
+    return age;
+  }
+
+  public void toNextGeneration() {
+    age++;
+  }
+
   private Cell getPrevious() {
     CellSpace previous = cellSpace.getPrevious();
     return previous.getContent();
@@ -75,6 +85,14 @@ public class Cell {
   public boolean matches(Cell other) {
     if (other != null) {
       return !(this.isAlive() ^ other.isAlive());
+    } else {
+      return false;
+    }
+  }
+
+  public boolean isDirectSuccessor(Cell other) {
+    if (other != null) {
+      return (this.isAlive() && other.isAlive());
     } else {
       return false;
     }

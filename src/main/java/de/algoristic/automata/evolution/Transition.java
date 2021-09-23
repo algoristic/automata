@@ -20,10 +20,14 @@ public class Transition {
   public Generation produceFilialGeneration() {
     if (filialGeneration == null) {
       List<Cell> filialCells = new ArrayList<>();
-      for (Cell cell : parentalGeneration) {
-        Pattern neighborhood = cell.getNeighborhood(appliedRule);
-        Cell filialCell = appliedRule.getOffspring(neighborhood);
-        filialCells.add(filialCell);
+      for (Cell ancestor : parentalGeneration) {
+        Pattern neighborhood = ancestor.getNeighborhood(appliedRule);
+        Cell successor = appliedRule.getOffspring(neighborhood);
+        if(ancestor.isDirectSuccessor(successor)) {
+          successor = ancestor.clone();
+          successor.toNextGeneration();
+        }
+        filialCells.add(successor);
       }
       filialGeneration = Generation.getGeneration(filialCells);
     }
