@@ -5,6 +5,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.evt.print.Printer;
 
 public class AutomatonTest {

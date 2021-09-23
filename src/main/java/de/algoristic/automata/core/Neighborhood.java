@@ -1,28 +1,44 @@
 package de.algoristic.automata.core;
 
+import java.util.Iterator;
 import java.util.List;
 import de.algoristic.automata.evolution.Pattern;
 
-public class Neighborhood implements Pattern {
+public class Neighborhood implements Pattern, Iterable<Cell> {
 
-  private final List<Cell> cells;
+  private final Cell cell;
+  private final List<Cell> neightbors;
 
-  public Neighborhood(List<Cell> cells) {
-    this.cells = cells;
+  public Neighborhood(Cell cell, List<Cell> neighbors) {
+    this.cell = cell;
+    this.neightbors = neighbors;
+  }
+
+  public Cell getCell() {
+    return cell;
+  }
+
+  public List<Cell> getNeighbors() {
+    return getCells();
   }
 
   @Override
   public List<Cell> getCells() {
-    return cells;
+    return neightbors;
   }
 
   @Override
   public int size() {
-    return cells.size();
+    return neightbors.size();
   }
 
   @Override
   public String toString() {
-    return cells.toString();
+    return neightbors.toString();
+  }
+
+  @Override
+  public Iterator<Cell> iterator() {
+    return neightbors.iterator();
   }
 }

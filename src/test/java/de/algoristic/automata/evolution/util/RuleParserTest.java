@@ -6,7 +6,7 @@ import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import de.algoristic.automata.evolution.Patterns;
 import de.algoristic.automata.evolution.RuleMetadata;
-import de.algoristic.automata.evolution.util.RuleParser;
+import de.algoristic.automata.evolution.util.ElementaryRuleParser;
 
 public class RuleParserTest {
 
@@ -26,7 +26,7 @@ public class RuleParserTest {
       int expectedRuleSpace,
       int expectedNeighborhood,
       int expectedCenterIndex) {
-    RuleParser ruleParser = new RuleParser(rule);
+    ElementaryRuleParser ruleParser = new ElementaryRuleParser(rule);
     RuleMetadata metadata = ruleParser.calculateRuleMetadata();
     assertEquals(expectedNumOfPatterns, metadata.getNumberOfPatterns());
     assertEquals(expectedRuleSpace, metadata.getRuleSpace());
@@ -46,7 +46,7 @@ public class RuleParserTest {
     "65535, 16",
     "65536, 32"})
   void testPatternParsing(int decimalRule, int expectedPatternAmount) {
-    RuleParser ruleParser = new RuleParser(decimalRule);
+    ElementaryRuleParser ruleParser = new ElementaryRuleParser(decimalRule);
     Patterns patterns = ruleParser.parseRulePatterns();
     assertEquals(expectedPatternAmount, patterns.size());
   }

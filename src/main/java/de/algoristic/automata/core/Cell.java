@@ -1,10 +1,7 @@
 package de.algoristic.automata.core;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import de.algoristic.automata.error.AutomatonException;
-import de.algoristic.automata.evolution.Pattern;
+import de.algoristic.automata.evolution.NeighborhoodParameters;
 import de.algoristic.automata.evolution.Rule;
 
 public class Cell {
@@ -12,10 +9,10 @@ public class Cell {
   public static final Character ALIVE = '1';
   public static final Character DEAD = '0';
 
-  private final boolean isAlive;
+  protected final boolean isAlive;
+  protected int age;
 
   private CellSpace cellSpace;
-  private int age;
 
   public Cell(final char state) {
     this.age = 0;
@@ -30,30 +27,19 @@ public class Cell {
     }
   }
 
-  private Cell(final Cell cell) {
+  private Cell(Cell cell) {
     this.isAlive = cell.isAlive();
     this.age = cell.getAge();
-  }
-
-  public Pattern getNeighborhood(Rule appliedRule) {
-    List<Cell> neighbors = new ArrayList<>();
-    Cell previous = this.getPrevious();
-    for (int i = 0; i < appliedRule.getCellsBeforeCenter(); i++) {
-      neighbors.add(previous);
-      previous = previous.getPrevious();
-    }
-    Collections.reverse(neighbors);
-    neighbors.add(this);
-    Cell next = this.getNext();
-    for (int i = 0; i < appliedRule.getCellsAfterCenter(); i++) {
-      neighbors.add(next);
-      next = next.getNext();
-    }
-    return new Neighborhood(neighbors);
+    this.age++;
   }
 
   public Cell clone() {
     return new Cell(this);
+  }
+
+  public Neighborhood getNeighborhood(NeighborhoodParameters parameters) {
+    Rule rule = parameters.getRule();
+    return rule.getNeighborhood(this, parameters);
   }
 
   public boolean isAlive() {
@@ -64,16 +50,12 @@ public class Cell {
     return age;
   }
 
-  public void toNextGeneration() {
-    age++;
-  }
-
-  private Cell getPrevious() {
+  public Cell getPrevious() {
     CellSpace previous = cellSpace.getPrevious();
     return previous.getContent();
   }
 
-  private Cell getNext() {
+  public Cell getNext() {
     CellSpace next = cellSpace.getNext();
     return next.getContent();
   }

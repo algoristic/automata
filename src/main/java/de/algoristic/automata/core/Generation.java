@@ -8,19 +8,26 @@ import de.algoristic.automata.core.util.Cells;
 public class Generation implements Iterable<Cell> {
 
   private final List<CellSpace> cellSpaces;
+  private final int verticalSpace;
 
-  private Generation(final List<CellSpace> cellSpaces) {
+  private Generation(final List<CellSpace> cellSpaces, int verticalSpace) {
     this.cellSpaces = cellSpaces;
+    this.verticalSpace = verticalSpace;
   }
 
   public static Generation getGeneration(String seed) {
     List<Cell> cells = Cells.of(seed);
-    return getGeneration(cells);
+    return getGeneration(cells, 1);
   }
 
-  public static Generation getGeneration(List<Cell> cells) {
+  public static Generation getGeneration(List<String> grid) {
+    List<Cell> cells = Cells.of(grid);
+    return getGeneration(cells, grid.size());
+  }
+
+  public static Generation getGeneration(List<Cell> cells, int verticalSpace) {
     List<CellSpace> cellSpaces = Cells.wrap(cells);
-    return new Generation(cellSpaces);
+    return new Generation(cellSpaces, verticalSpace);
   }
 
   public String toBinaryString() {
@@ -31,6 +38,10 @@ public class Generation implements Iterable<Cell> {
 
   public int size() {
     return cellSpaces.size();
+  }
+
+  public int getVerticalSpace() {
+    return verticalSpace;
   }
 
   public Cell get(int index) {

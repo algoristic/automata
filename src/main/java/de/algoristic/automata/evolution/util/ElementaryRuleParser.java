@@ -9,14 +9,14 @@ import de.algoristic.automata.evolution.RuleMetadata;
 import de.algoristic.automata.evolution.RulePattern;
 import de.algoristic.automata.util.BinaryStringUtils;
 
-public class RuleParser {
+public class ElementaryRuleParser {
 
   private final int decimalRule;
 
   private Patterns patterns;
   private RuleMetadata metadata;
 
-  public RuleParser(int decimalRule) {
+  public ElementaryRuleParser(int decimalRule) {
     this.decimalRule = decimalRule;
   }
 

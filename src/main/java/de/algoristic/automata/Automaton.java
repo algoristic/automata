@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
 import de.algoristic.automata.core.Generation;
-import de.algoristic.automata.evolution.Rule;
+import de.algoristic.automata.evolution.ElementaryRule;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
@@ -16,13 +16,13 @@ import de.algoristic.automata.evt.StartBreedingEvent;
 
 public class Automaton {
 
-  private Rule rule;
+  private ElementaryRule rule;
   private int runtime;
 
   private List<Generation> generations = new ArrayList<>();
   private RegisteredEvents events = new RegisteredEvents();
 
-  private Automaton(final Generation initialGeneration, Rule rule, int runtime) {
+  private Automaton(final Generation initialGeneration, ElementaryRule rule, int runtime) {
     this.rule = rule;
     this.runtime = runtime;
     this.generations.add(initialGeneration);
@@ -50,7 +50,7 @@ public class Automaton {
   }
 
   public void setRule(int decimalRule) {
-    this.rule = Rule.getInstance(decimalRule);
+    this.rule = ElementaryRule.getInstance(decimalRule);
   }
 
   public void setRuntime(int runtime) {
@@ -75,7 +75,7 @@ public class Automaton {
 
   public static class Builder {
     private final Generation initialGeneration;
-    private Rule rule = Rule.getInstance(0);
+    private ElementaryRule rule = ElementaryRule.getInstance(0);
     private int runtime = 0;
 
     public Builder(final String seed) {
@@ -110,7 +110,7 @@ public class Automaton {
     }
 
     public Builder withRule(final int rule) {
-      this.rule = Rule.getInstance(rule);
+      this.rule = ElementaryRule.getInstance(rule);
       return this;
     }
 
