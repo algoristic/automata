@@ -57,13 +57,11 @@ public class Automaton {
     this.runtime = runtime;
   }
 
-  public void registerStartAutomationListener(
-      AutomatonEventListener<StartAutomationEvent> listener) {
+  public void registerStartAutomationListener(AutomatonEventListener<StartAutomationEvent> listener) {
     events.registerStartAutomationListener(listener);
   }
 
-  public void registerFinishAutomationListener(
-      AutomatonEventListener<FinishAutomationEvent> listener) {
+  public void registerFinishAutomationListener(AutomatonEventListener<FinishAutomationEvent> listener) {
     events.registerFinishAutomationListener(listener);
   }
 

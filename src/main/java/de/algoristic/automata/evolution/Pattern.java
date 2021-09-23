@@ -20,7 +20,6 @@ public interface Pattern {
         if (!thisCell.matches(otherCell)) {
           return false;
         }
-        ;
       }
       return true;
     } else {

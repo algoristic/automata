@@ -28,14 +28,14 @@ class StaticPrinter extends Printer {
     BufferedImage image = Images.getColoredImage(numberOfCells * scale, amountOfGenerations * scale, backgroundColor);
     int rgb = cellColor.getRGB();
     int[] rgbArray = new int[scale];
-    for(int i = 0; i < rgbArray.length; i++) {
+    for (int i = 0; i < rgbArray.length; i++) {
       rgbArray[i] = rgb;
     }
-    for(int y = 0; y < amountOfGenerations; y++) {
+    for (int y = 0; y < amountOfGenerations; y++) {
       Generation generation = generations.get(y);
-      for(int x = 0; x < numberOfCells; x++) {
+      for (int x = 0; x < numberOfCells; x++) {
         Cell cell = generation.get(x);
-        if(cell.isAlive()) {
+        if (cell.isAlive()) {
           image.setRGB(x * scale, y * scale, scale, scale, rgbArray, 0, 0);
         }
       }

@@ -27,10 +27,8 @@ public class CellTest {
   @ParameterizedTest
   @ValueSource(chars = {'2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c'})
   void throwErrorOnInvalidCellTest(char invalidChar) {
-    assertThrows(
-        AutomatonException.class,
-        () -> {
-          new Cell(invalidChar);
-        });
+    assertThrows(AutomatonException.class, () -> {
+      new Cell(invalidChar);
+    });
   }
 }

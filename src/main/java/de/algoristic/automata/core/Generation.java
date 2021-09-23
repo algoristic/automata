@@ -24,7 +24,9 @@ public class Generation implements Iterable<Cell> {
   }
 
   public String toBinaryString() {
-    return cellSpaces.stream().map(CellSpace::toString).collect(Collectors.joining());
+    return cellSpaces.stream()
+      .map(CellSpace::toString)
+      .collect(Collectors.joining());
   }
 
   public int size() {
@@ -38,7 +40,9 @@ public class Generation implements Iterable<Cell> {
 
   @Override
   public Iterator<Cell> iterator() {
-    return cellSpaces.stream().map(CellSpace::getContent).iterator();
+    return cellSpaces.stream()
+      .map(CellSpace::getContent)
+      .iterator();
   }
 
   @Override

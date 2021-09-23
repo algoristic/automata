@@ -27,7 +27,6 @@ public class Patterns {
         return rulePattern.getResultCell();
       }
     }
-    throw new CriticalAutomatonException(
-        "found no pattern matching neighborhood. this should never happen.");
+    throw new CriticalAutomatonException("found no pattern matching neighborhood. this should never happen.");
   }
 }

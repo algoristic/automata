@@ -7,13 +7,10 @@ public class RegisteredEvents {
 
   private List<AutomatonEventListener<StartAutomationEvent>> startListeners = new ArrayList<>();
   private List<AutomatonEventListener<FinishAutomationEvent>> finishListeners = new ArrayList<>();
-  private List<AutomatonEventListener<StartBreedingEvent>> startBreedingListeners =
-      new ArrayList<>();
-  private List<AutomatonEventListener<FinishBreedingEvent>> finishBreedingListeners =
-      new ArrayList<>();
+  private List<AutomatonEventListener<StartBreedingEvent>> startBreedingListeners = new ArrayList<>();
+  private List<AutomatonEventListener<FinishBreedingEvent>> finishBreedingListeners = new ArrayList<>();
 
-  public void registerStartAutomationListener(
-      AutomatonEventListener<StartAutomationEvent> listener) {
+  public void registerStartAutomationListener(AutomatonEventListener<StartAutomationEvent> listener) {
     startListeners.add(listener);
   }
 
@@ -21,8 +18,7 @@ public class RegisteredEvents {
     registerEvent(event, startListeners);
   }
 
-  public void registerFinishAutomationListener(
-      AutomatonEventListener<FinishAutomationEvent> listener) {
+  public void registerFinishAutomationListener(AutomatonEventListener<FinishAutomationEvent> listener) {
     finishListeners.add(listener);
   }
 
@@ -46,11 +42,9 @@ public class RegisteredEvents {
     registerEvent(event, finishBreedingListeners);
   }
 
-  public <E extends AutomatonEvent> void registerEvent(
-      E event, List<AutomatonEventListener<E>> listeners) {
-    listeners.forEach(
-        listener -> {
-          listener.on(event);
-        });
+  public <E extends AutomatonEvent> void registerEvent(E event, List<AutomatonEventListener<E>> listeners) {
+    listeners.forEach(listener -> {
+      listener.on(event);
+    });
   }
 }

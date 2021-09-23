@@ -9,18 +9,18 @@ import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.Transition;
 
 public class TransitionTest {
-	
-	@Test
-	void basicTransitionTest() {
-		Rule rule = Rule.getInstance(30);
-		Generation parentalGeneration = Generation.getGeneration("0011100");
-		Transition transition = new Transition(parentalGeneration, rule);
-		Generation filialGeneration = transition.produceFilialGeneration();
-		String s = "";
-		for(Cell cell: filialGeneration) {
-			s += cell;
-		}
-		assertEquals("0110010", s);
-	}
-	
+
+  @Test
+  void basicTransitionTest() {
+    Rule rule = Rule.getInstance(30);
+    Generation parentalGeneration = Generation.getGeneration("0011100");
+    Transition transition = new Transition(parentalGeneration, rule);
+    Generation filialGeneration = transition.produceFilialGeneration();
+    String s = "";
+    for (Cell cell : filialGeneration) {
+      s += cell;
+    }
+    assertEquals("0110010", s);
+  }
+
 }

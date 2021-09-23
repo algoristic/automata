@@ -31,7 +31,7 @@ class AnimatedPrinter extends Printer {
     int amountOfGenerations = generations.size() - 1;
     for (int step = 0; step < amountOfGenerations; step++) {
       BufferedImage img = Images.getColoredImage(numberOfCells, amountOfGenerations, backgroundColor);
-      for(int y = 0; y <= step; y++) {
+      for (int y = 0; y <= step; y++) {
         Generation generation = generations.get(y);
         for (int x = 0; x < numberOfCells; x++) {
           Cell cell = generation.get(x);
@@ -45,7 +45,7 @@ class AnimatedPrinter extends Printer {
     }
     printMainFile(files, rule);
   }
-  
+
   private File printTempFile(BufferedImage img, int rule, int step) {
     System.out.println("Print rule " + rule + "; step " + step);
     String tmpFileName = MessageFormat.format("{0}_automaton_{1}.gif", rule, step);
@@ -58,7 +58,7 @@ class AnimatedPrinter extends Printer {
     }
     return tmpImageFile;
   }
-  
+
   private void printMainFile(List<File> files, int rule) {
     try {
       BufferedImage first = ImageIO.read(files.get(0));
@@ -67,7 +67,7 @@ class AnimatedPrinter extends Printer {
       File imageFile = imagePath.toFile();
       ImageOutputStream output = new FileImageOutputStream(imageFile);
       GifSequenceWriter writer = new GifSequenceWriter(output, type, 1, true);
-      for(File file: files) {
+      for (File file : files) {
         BufferedImage b = ImageIO.read(file);
         writer.writeToSequence(b);
         file.delete();
