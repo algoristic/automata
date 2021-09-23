@@ -4,9 +4,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
-import java.util.stream.IntStream;
 import org.junit.jupiter.api.Test;
-import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.print.Printer;
 
 public class AutomatonTest {
