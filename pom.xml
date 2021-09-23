@@ -4,10 +4,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aconso</groupId>
 	<artifactId>automata</artifactId>
-	<version>0.0.1</version>
+	<version>1.0.0</version>
 	<name>automata</name>
-	<description>Elementary cellular automata, inspired by the works of Stephen Wolfram.</description>
+	<description>Cellular automata, inspired by the works of Stephen Wolfram, John H. Conway et al.</description>
 	<properties>
+		<java.version>11</java.version>
 		<junit.version>5.5.2</junit.version>
 		<log4j-core.version>2.12.1</log4j-core.version>
 	</properties>
@@ -44,8 +45,8 @@
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
 				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
 				</configuration>
 			</plugin>
 		</plugins>
