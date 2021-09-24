@@ -23,11 +23,10 @@ public class ConwaysGameOfLifeTest {
     Automaton automaton = Automaton.Builder
       .gameOfLife(Rules.DIAMOEBA)
       .random()
-      .withRuntime(25)
+      .withRuntime(250)
       .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();
     printer.print();
   }
-  
 }

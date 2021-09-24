@@ -2,13 +2,13 @@ package de.algoristic.automata.evt.print;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.IOException;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import javax.imageio.stream.FileImageOutputStream;
-import javax.imageio.stream.ImageOutputStream;
+import de.algoristic.automata.evt.print.AnimatedGIFWriter.GIFFrame;
 
 public class GameOfLifePrinter {
 
@@ -25,20 +25,18 @@ public class GameOfLifePrinter {
   }
 
   public void print() {
-    try {
-      BufferedImage first = ImageIO.read(files.get(0));
-      int type = first.getType();
-      File imageFile = filepath.toFile();
-      ImageOutputStream output = new FileImageOutputStream(imageFile);
-      GifSequenceWriter writer = new GifSequenceWriter(output, type, 50, true);
+    AnimatedGIFWriter gifWriter = new AnimatedGIFWriter();
+    File imageFile = filepath.toFile();
+    try (OutputStream os = new FileOutputStream(imageFile)) {
+      List<GIFFrame> frames = new ArrayList<>();
       for (File file : files) {
         BufferedImage b = ImageIO.read(file);
-        writer.writeToSequence(b);
-//        file.delete();
+        GIFFrame frame = new GIFFrame(b, 100);
+        frames.add(frame);
+        file.delete();
       }
-      writer.close();
-      output.close();
-    } catch (IOException e) {
+      gifWriter.writeAnimatedGIF(frames, os);
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }
