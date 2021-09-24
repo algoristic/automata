@@ -1,5 +1,7 @@
 package de.algoristic.automata.evolution.dimensional;
 
+import de.algoristic.automata.core.Generation;
+
 public class Grid {
 
   private final int xAxis;
@@ -8,6 +10,12 @@ public class Grid {
   public Grid(int xAxis, int yAxis) {
     this.xAxis = xAxis;
     this.yAxis = yAxis;
+  }
+
+  public static Grid fromGeneration(Generation generation) {
+    int size = generation.size();
+    int verticalSpace = generation.getVerticalSpace();
+    return fromOneDimension(size, verticalSpace);
   }
 
   public static Grid fromOneDimension(int size, int verticalSpace) {

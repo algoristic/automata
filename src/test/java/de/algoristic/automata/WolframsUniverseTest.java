@@ -5,17 +5,17 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
-import de.algoristic.automata.core.Cell;
+import de.algoristic.automata.evt.FinishAutomationEvent;
 import de.algoristic.automata.evt.print.Printer;
 
-public class AutomatonTest {
+public class WolframsUniverseTest {
 
   static Path baseDirectory = Paths.get("C:/Users/male233/Desktop/automata/elementary");
   static Path chaoticDir = baseDirectory.resolve("chaotic");
   static Path simpleDir = baseDirectory.resolve("simple");
 
-  static Printer chaoticPrinter = new Printer.Builder(chaoticDir).build();
-  static Printer simplePrinter = new Printer.Builder(simpleDir).build();
+  static Printer<FinishAutomationEvent> chaoticPrinter = new Printer.Builder(chaoticDir).buildElementaryPrinter();
+  static Printer<FinishAutomationEvent> simplePrinter = new Printer.Builder(simpleDir).buildElementaryPrinter();
 
   static List<Integer> simpleRules = Arrays.asList(18, 22, 26, 30, 45, 60, 73, 75, 82, 86, 90, 101, 102, 105, 109, 110, 124, 126, 129, 135, 137, 146, 149, 150, 153, 154, 161, 165, 167, 169, 181, 182, 193, 195, 210, 214, 218, 225);
   static List<Integer> chaoticRules = Arrays.asList(18, 22, 30, 54, 60, 62, 90, 105, 106, 110, 122, 126, 146, 150);
@@ -27,8 +27,8 @@ public class AutomatonTest {
     chaoticRules.forEach(rule -> {
       Automaton automaton =
         Automaton.Builder
+          .wolframsUniverse(rule)
           .chaotic(width)
-          .withRule(rule)
           .withRuntime(height)
           .build();
       automaton.registerFinishAutomationListener(chaoticPrinter);
@@ -43,8 +43,8 @@ public class AutomatonTest {
     simpleRules.forEach(rule -> {
       Automaton automaton = 
         Automaton.Builder
+          .wolframsUniverse(rule)
           .simple(width)
-          .withRule(rule)
           .withRuntime(height)
           .build();
       automaton.registerFinishAutomationListener(simplePrinter);

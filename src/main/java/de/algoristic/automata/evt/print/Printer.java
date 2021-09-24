@@ -4,69 +4,55 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
-import java.util.List;
-import javax.imageio.ImageIO;
-import de.algoristic.automata.core.Cell;
-import de.algoristic.automata.core.Generation;
+import java.util.function.Consumer;
+import de.algoristic.automata.evt.AutomatonEvent;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
+import de.algoristic.automata.evt.FinishBreedingEvent;
 
-public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
+public abstract class Printer<E extends AutomatonEvent> implements AutomatonEventListener<E> {
 
+  final private String filename;
   final private Path path;
   final private Color backgroundColor;
   final private Color aliveCellColor;
   final private Color deadCellColor;
   final private int size;
   final private int border;
+  final private Consumer<File> callback;
 
-  public Printer(Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border) {
+  public Printer(String filename, Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border, Consumer<File> callback) {
+    this.filename = filename;
     this.path = path;
     this.backgroundColor = backgroundColor;
     this.aliveCellColor = aliveCellColor;
     this.deadCellColor = deadCellColor;
     this.size = size;
     this.border = border;
+    this.callback = callback;
   }
 
-  @Override
-  public void on(FinishAutomationEvent event) {
-    int rule = 0;//event.getRule();
-    List<Generation> generations = event.getGenerations();
-    int numberOfCells = generations.get(0).size();
-    int amountOfGenerations = generations.size() - 1;
-    BufferedImage image = getImage(numberOfCells, amountOfGenerations);
-    int[] alive = getRgbArray(true);
-    int[] dead = getRgbArray(false);
-    for (int y = 0; y < amountOfGenerations; y++) {
-      Generation generation = generations.get(y);
-      for (int x = 0; x < numberOfCells; x++) {
-        Cell cell = generation.get(x);
-        int startX = calcStart(x);
-        int startY = calcStart(y);
-        int[] color;
-        if (cell.isAlive()) {
-          color = alive;
-        } else {
-          color = dead;
-        }
-        image.setRGB(startX, startY, size, size, color, 0, 0);
-      }
-    }
-    Path imagePath = path.resolve("rule_" + rule + ".gif");
-    File imageFile = imagePath.toFile();
-    try {
-      ImageIO.write(image, "gif", imageFile);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+  protected String getFilename() {
+    return filename;
   }
 
-  private int calcStart(int n) {
+  protected Path getPath() {
+    return path;
+  }
+
+  protected int getSize() {
+    return size;
+  }
+
+  protected void callback(File file) {
+    this.callback.accept(file);
+  }
+
+  protected int calcStart(int n) {
     return ((n * size) + ((n + 1) * border));
   }
 
-  private int[] getRgbArray(boolean alive) {
+  protected int[] getRgbArray(boolean alive) {
     Color color;
     if(alive) {
       color = aliveCellColor;
@@ -81,9 +67,9 @@ public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
     return rgbArray;
   }
 
-  private BufferedImage getImage(int numberOfCells, int amountOfGenerations) {
-    int width = (numberOfCells * size) + (numberOfCells * border);
-    int height = (amountOfGenerations * size) + (numberOfCells * border);
+  protected BufferedImage getImage(int numberOfCells, int amountOfGenerations) {
+    int width = (numberOfCells * size) + (numberOfCells * border) + border;
+    int height = (amountOfGenerations * size) + (numberOfCells * border) + border;
     BufferedImage image = Images.getColoredImage(width, height, backgroundColor);
     return image;
   }
@@ -91,15 +77,22 @@ public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
   public static class Builder {
 
     private final Path path;
+    private String filename = "CA";
     private Color backgroundColor = Color.lightGray;
     private Color aliveCellColor = Color.black;
     private Color deadCellColor = Color.white;
     private int size = 8;
     private int border = 1;
     private int scaling = 1;
+    private Consumer<File> callback = (file) -> {};
 
     public Builder(Path path) {
       this.path = path;
+    }
+
+    public Builder withFilename(String filename) {
+      this.filename = filename;
+      return this;
     }
 
     public Builder withBackgroundColor(Color backgroundColor) {
@@ -132,10 +125,21 @@ public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
       return this;
     }
 
-    public Printer build() {
+    public Builder withCallback(Consumer<File> callback) {
+      this.callback = callback;
+      return this;
+    }
+
+    public Printer<FinishAutomationEvent> buildElementaryPrinter() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new Printer(path, backgroundColor, aliveCellColor, deadCellColor, size, border);
+      return new ElementaryPrinter(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
+    }
+
+    public Printer<FinishBreedingEvent> buildEvolutionStepBuilder() {
+      int size = (this.size * scaling);
+      int border = (this.border * scaling);
+      return new GameOfLifeEvolutionStepPrinter(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
     }
   }
 }

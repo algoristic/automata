@@ -1,6 +1,8 @@
 package de.algoristic.automata.evolution;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
@@ -11,8 +13,15 @@ import de.algoristic.automata.evolution.util.GameOfLifeRuleParser;
 
 public class GameOfLifeRule implements Rule {
 
+  private static final Map<String, String> specialRules;
+
   private final List<Integer> stayAlivePossibilities;
   private final List<Integer> becomeAlivePossibilities;
+
+  static {
+    specialRules = new HashMap<>();
+    specialRules.put("B3/S23", "Conways_Life");
+  }
 
   public GameOfLifeRule(
       List<Integer> stayAlivePossibilities,
@@ -47,8 +56,7 @@ public class GameOfLifeRule implements Rule {
   public Neighborhood getNeighborhood(Cell cell, NeighborhoodParameters parameters) {
     int position = parameters.getCurrentCellIndex();
     Generation generation = parameters.getGeneration();
-    int verticalSpace = generation.getVerticalSpace();
-    Grid grid = Grid.fromOneDimension(generation.size(), verticalSpace);    
+    Grid grid = Grid.fromGeneration(generation);
     Point cellPosition = grid.transpose(position);
     List<Point> mooreNeighborhood = cellPosition.getMooreNeighborhood();
     List<Cell> neighbors = mooreNeighborhood.stream()
@@ -74,5 +82,18 @@ public class GameOfLifeRule implements Rule {
 
   public List<Integer> getBecomeAlivePossibilities() {
     return becomeAlivePossibilities;
+  }
+
+  @Override
+  public String toString() {
+    StringBuffer buffer = new StringBuffer();
+    
+    String result = buffer.toString();
+    if(specialRules.containsKey(result)) {
+      result = specialRules.get(result);
+    } else {
+      result.replace("/", "_");
+    }
+    return result;
   }
 }

@@ -73,4 +73,8 @@ public class ElementaryRule implements Rule {
     return metadata.getCellsAfterCenter();
   }
 
+  @Override
+  public String toString() {
+    return String.valueOf(decimalRule);
+  }
 }

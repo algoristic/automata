@@ -1,6 +1,9 @@
 package de.algoristic.automata.evt;
 
+import de.algoristic.automata.evolution.Rule;
+
 public interface AutomatonEvent {
 
-  public long getTimestamp();
+  long getTimestamp();
+  Rule getRule();
 }

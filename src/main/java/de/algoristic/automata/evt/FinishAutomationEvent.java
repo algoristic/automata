@@ -9,7 +9,7 @@ public class FinishAutomationEvent extends AbstractAutomatonEvent {
   private List<Generation> generations;
 
   public FinishAutomationEvent(Automaton automaton, List<Generation> generations) {
-    super();
+    super(automaton.getRule());
     this.generations = generations;
   }
 
