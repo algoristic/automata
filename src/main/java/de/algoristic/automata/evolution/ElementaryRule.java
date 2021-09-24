@@ -19,7 +19,7 @@ public class ElementaryRule implements Rule {
     this.patterns = patterns;
   }
 
-  public static ElementaryRule getInstance(final int decimalRule) {
+  public static Rule getInstance(final int decimalRule) {
     ElementaryRuleParser parser = new ElementaryRuleParser(decimalRule);
     RuleMetadata metadata = parser.calculateRuleMetadata();
     Patterns patterns = parser.parseRulePatterns();

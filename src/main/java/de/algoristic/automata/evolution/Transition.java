@@ -27,7 +27,7 @@ public class Transition {
         Neighborhood neighborhood = ancestor.getNeighborhood(parameters);
         Cell successor = rule.getOffspring(neighborhood);
         if(ancestor.isDirectSuccessor(successor)) {
-          successor = ancestor.clone();
+          successor = ancestor.stayAlive();
         }
         filialCells.add(successor);
       }

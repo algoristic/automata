@@ -14,7 +14,7 @@ public class RulePattern implements Pattern {
   }
 
   public Cell getResultCell() {
-    return resultCell.clone();
+    return new Cell(resultCell);
   }
 
   @Override

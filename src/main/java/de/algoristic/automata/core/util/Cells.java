@@ -17,11 +17,6 @@ public abstract class Cells {
     return cells;
   }
 
-  public static List<Cell> of(List<String> grid) {
-    // TODO implement
-    return null;
-  }
-
   // TODO what to do, when generation empty? error or just nothing? ...
   public static List<CellSpace> wrap(List<Cell> cells) {
     List<CellSpace> cellSpaces = new ArrayList<>();

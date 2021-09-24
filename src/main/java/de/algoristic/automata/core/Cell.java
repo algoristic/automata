@@ -27,14 +27,15 @@ public class Cell {
     }
   }
 
-  private Cell(Cell cell) {
+  public Cell(Cell cell) {
     this.isAlive = cell.isAlive();
     this.age = cell.getAge();
-    this.age++;
   }
 
-  public Cell clone() {
-    return new Cell(this);
+  public Cell stayAlive() {
+    Cell cell = new Cell(this);
+    cell.incrementAge();
+    return cell;
   }
 
   public Neighborhood getNeighborhood(NeighborhoodParameters parameters) {
@@ -48,6 +49,10 @@ public class Cell {
 
   public int getAge() {
     return age;
+  }
+
+  private void incrementAge() {
+    age++;
   }
 
   public Cell getPrevious() {

@@ -31,7 +31,7 @@ public class Printer implements AutomatonEventListener<FinishAutomationEvent> {
 
   @Override
   public void on(FinishAutomationEvent event) {
-    int rule = event.getRule();
+    int rule = 0;//event.getRule();
     List<Generation> generations = event.getGenerations();
     int numberOfCells = generations.get(0).size();
     int amountOfGenerations = generations.size() - 1;

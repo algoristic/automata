@@ -1,12 +1,11 @@
 package de.algoristic.automata.evolution.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import de.algoristic.automata.evolution.GameOfLifeRule;
 import de.algoristic.automata.evolution.Patterns;
 import de.algoristic.automata.evolution.RuleMetadata;
-import de.algoristic.automata.evolution.util.ElementaryRuleParser;
 
 public class RuleParserTest {
 
@@ -49,5 +48,19 @@ public class RuleParserTest {
     ElementaryRuleParser ruleParser = new ElementaryRuleParser(decimalRule);
     Patterns patterns = ruleParser.parseRulePatterns();
     assertEquals(expectedPatternAmount, patterns.size());
+  }
+
+  @ParameterizedTest
+  @CsvSource(value = {
+      "23/3, 2, 1",
+      "B3/S23, 2, 1",
+      "B234/S, 0, 3",
+      "/234, 0, 3"
+  })
+  void gameOfLifeRuleParserTest(String ruleString, int stayAliveNum, int becomAliveNum) {
+    GameOfLifeRuleParser parser = new GameOfLifeRuleParser(ruleString);
+    GameOfLifeRule rule = parser.parse();
+    assertEquals(stayAliveNum, rule.getStayAlivePossibilities().size());
+    assertEquals(becomAliveNum, rule.getBecomeAlivePossibilities().size());
   }
 }

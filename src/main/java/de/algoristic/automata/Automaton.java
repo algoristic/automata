@@ -6,6 +6,7 @@ import java.util.Random;
 import java.util.stream.IntStream;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.evolution.ElementaryRule;
+import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
@@ -16,13 +17,13 @@ import de.algoristic.automata.evt.StartBreedingEvent;
 
 public class Automaton {
 
-  private ElementaryRule rule;
+  private Rule rule;
   private int runtime;
 
   private List<Generation> generations = new ArrayList<>();
   private RegisteredEvents events = new RegisteredEvents();
 
-  private Automaton(final Generation initialGeneration, ElementaryRule rule, int runtime) {
+  private Automaton(final Generation initialGeneration, Rule rule, int runtime) {
     this.rule = rule;
     this.runtime = runtime;
     this.generations.add(initialGeneration);
@@ -43,10 +44,6 @@ public class Automaton {
     int lastGeneration = (generations.size() - 1);
     Generation result = generations.get(lastGeneration);
     return result.toBinaryString();
-  }
-
-  public int getRule() {
-    return rule.getDecimalRule();
   }
 
   public void setRule(int decimalRule) {
@@ -75,7 +72,7 @@ public class Automaton {
 
   public static class Builder {
     private final Generation initialGeneration;
-    private ElementaryRule rule = ElementaryRule.getInstance(0);
+    private Rule rule = ElementaryRule.getInstance(0);
     private int runtime = 0;
 
     public Builder(final String seed) {

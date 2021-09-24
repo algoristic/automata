@@ -20,9 +20,9 @@ public class Generation implements Iterable<Cell> {
     return getGeneration(cells, 1);
   }
 
-  public static Generation getGeneration(List<String> grid) {
-    List<Cell> cells = Cells.of(grid);
-    return getGeneration(cells, grid.size());
+  public static Generation getGeneration(String seed, int verticalSpace) {
+    List<Cell> cells = Cells.of(seed);
+    return getGeneration(cells, verticalSpace);
   }
 
   public static Generation getGeneration(List<Cell> cells, int verticalSpace) {
