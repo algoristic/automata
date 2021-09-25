@@ -1,7 +1,6 @@
 package de.algoristic.automata;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.IntStream;
@@ -9,6 +8,7 @@ import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.evolution.ElementaryRule;
 import de.algoristic.automata.evolution.GameOfLifeRule;
 import de.algoristic.automata.evolution.Rule;
+import de.algoristic.automata.evolution.Rules;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
@@ -16,6 +16,7 @@ import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.evt.RegisteredEvents;
 import de.algoristic.automata.evt.StartAutomationEvent;
 import de.algoristic.automata.evt.StartBreedingEvent;
+import de.algoristic.automata.io.Seed;
 
 public class Automaton {
 
@@ -70,7 +71,7 @@ public class Automaton {
 
   public abstract static class Builder {
     
-    private final Rule rule;
+    protected final Rule rule;
     protected Generation generation;
     protected int runtime = 0;
     
@@ -85,6 +86,14 @@ public class Automaton {
 
     public static WolframsUniverseBuilder wolframsUniverse(ElementaryRule rule) {
       return new WolframsUniverseBuilder(rule);
+    }
+
+    public static GameOfLifeBuilder gameOfLife() {
+      return gameOfLifeBuilder(Rules.CONWAYS_LIFE);
+    }
+
+    public static GameOfLifeBuilder gameOfLifeBuilder(Rules rule) {
+      return new GameOfLifeBuilder(rule.get());
     }
 
     public static GameOfLifeBuilder gameOfLife(String ruleString) {
@@ -148,54 +157,16 @@ public class Automaton {
       super(rule);
     }
 
-    //FIXME dummy
-    public Builder blinker() {
-      generation = Generation.getGeneration("000111000", 3);
+    public GameOfLifeBuilder withUnlimitedSpace(boolean unlimitedSpace) {
+      ((GameOfLifeRule) rule).setSpaceUnlimited(unlimitedSpace);
       return this;
     }
-    //FIXME dummy
-    public Builder pulsar() {
-      List<String> configuration = Arrays.asList(
-          "000000000000000",
-          "000111000111000",
-          "000000000000000",
-          "010000101000010",
-          "010000101000010",
-          "010000101000010",
-          "000111000111000",
-          "000000000000000",
-          "000111000111000",
-          "010000101000010",
-          "010000101000010",
-          "010000101000010",
-          "000000000000000",
-          "000111000111000",
-          "000000000000000"
-      );
-      StringBuffer buffer = new StringBuffer();
-      configuration.forEach(buffer::append);
-      String seed = buffer.toString();
-      generation = Generation.getGeneration(seed, configuration.size());
+
+    public Builder withSeed(Seed seed) {
+      String content = seed.getContent();
+      int verticalSpace = seed.getVerticalDimension();
+      generation = Generation.getGeneration(content, verticalSpace);
       return this;
-    }
-    //FIXME dummy
-    public Builder random() {
-      int size = 101;
-      Random rnd = new Random();
-      String seed = "";
-      for(int i = 0; i < size; i++) {
-        String line = "";
-        for(int k = 0; k < size; k++) {
-          if(rnd.nextBoolean()) {
-            line += "1";
-          } else {
-            line += "0";
-          }
-        }
-        seed += line;
-      }
-      generation = Generation.getGeneration(seed, size);
-      return this;
-    }
+    }      
   }
 }

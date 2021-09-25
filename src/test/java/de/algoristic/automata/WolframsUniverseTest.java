@@ -22,7 +22,7 @@ public class WolframsUniverseTest {
 
   @Test
   void chaoticTest() {
-    int width = 101;
+    int width = 51;
     int height = width;
     chaoticRules.forEach(rule -> {
       Automaton automaton =

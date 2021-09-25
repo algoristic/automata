@@ -51,4 +51,18 @@ public class PointTest {
     neighborhood = p2.getMooreNeighborhood();
     assertEquals(3, neighborhood.size());
   }
+
+  @Test
+  void traversingPointTest() {
+    Grid grid = new Grid(2, 2);
+    Point p1 = new TraversingPoint(0, 0, grid);
+    p1 = p1.left();
+    assertTrue(p1.isValid());
+    assertEquals(2, p1.getX());
+
+    Point p2 = new TraversingPoint(0, 1, grid);
+    p2 = p2.upLeft();
+    assertEquals(2, p2.getX());
+    assertEquals(0, p2.getY());
+  }
 }

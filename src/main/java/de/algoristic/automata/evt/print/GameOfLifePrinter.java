@@ -25,15 +25,29 @@ public class GameOfLifePrinter {
   }
 
   public void print() {
+    print(true, 100);
+  }
+
+  public void print(boolean delete) {
+    print(delete, 100);
+  }
+
+  public void print(int delay) {
+    print(true, delay);
+  }
+
+  public void print(boolean delete, int delay) {
     AnimatedGIFWriter gifWriter = new AnimatedGIFWriter();
     File imageFile = filepath.toFile();
     try (OutputStream os = new FileOutputStream(imageFile)) {
       List<GIFFrame> frames = new ArrayList<>();
       for (File file : files) {
         BufferedImage b = ImageIO.read(file);
-        GIFFrame frame = new GIFFrame(b, 100);
+        GIFFrame frame = new GIFFrame(b, delay);
         frames.add(frame);
-        file.delete();
+        if(delete) {
+          file.delete();
+        }
       }
       gifWriter.writeAnimatedGIF(frames, os);
     } catch (Exception e) {

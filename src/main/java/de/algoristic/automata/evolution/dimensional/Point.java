@@ -17,9 +17,9 @@ public class Point {
     Point::downLeft,
     Point::downRight);
 
-  private final int x;
-  private final int y;
-  private final Grid grid;
+  protected final int x;
+  protected final int y;
+  protected final Grid grid;
 
   public Point(int x, int y, Grid grid) {
     this.x = x;
@@ -88,6 +88,10 @@ public class Point {
   }
 
   boolean isValid() {
+    return isValidPosition(x, y);
+  }
+
+  protected boolean isValidPosition(int x, int y) {
     int leftBorder = grid.getLeftBorder();
     int rightBorder = grid.getRightBorder();
     int upperBorder = grid.getUpperBorder();

@@ -1,8 +1,6 @@
 package de.algoristic.automata.evolution;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.stream.Collectors;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
@@ -13,15 +11,10 @@ import de.algoristic.automata.evolution.util.GameOfLifeRuleParser;
 
 public class GameOfLifeRule implements Rule {
 
-  private static final Map<String, String> specialRules;
-
   private final List<Integer> stayAlivePossibilities;
   private final List<Integer> becomeAlivePossibilities;
 
-  static {
-    specialRules = new HashMap<>();
-    specialRules.put("B3/S23", "Conways_Life");
-  }
+  private boolean unlimitedSpace = false;
 
   public GameOfLifeRule(
       List<Integer> stayAlivePossibilities,
@@ -30,7 +23,7 @@ public class GameOfLifeRule implements Rule {
     this.becomeAlivePossibilities = becomeAlivePossibilities;
   }
 
-  public static Rule getInstance(String ruleString) {
+  public static GameOfLifeRule getInstance(String ruleString) {
     GameOfLifeRuleParser parser = new GameOfLifeRuleParser(ruleString);
     return parser.parse();
   }
@@ -57,7 +50,7 @@ public class GameOfLifeRule implements Rule {
     int position = parameters.getCurrentCellIndex();
     Generation generation = parameters.getGeneration();
     Grid grid = Grid.fromGeneration(generation);
-    Point cellPosition = grid.transpose(position);
+    Point cellPosition = grid.transpose(position, unlimitedSpace);
     List<Point> mooreNeighborhood = cellPosition.getMooreNeighborhood();
     List<Cell> neighbors = mooreNeighborhood.stream()
       .map(Point::transposeToIndex)
@@ -76,6 +69,10 @@ public class GameOfLifeRule implements Rule {
     return counter;
   }
 
+  public void setSpaceUnlimited(boolean unlimitedSpace) {
+    this.unlimitedSpace = unlimitedSpace;
+  }
+
   public List<Integer> getStayAlivePossibilities() {
     return stayAlivePossibilities;
   }
@@ -86,13 +83,15 @@ public class GameOfLifeRule implements Rule {
 
   @Override
   public String toString() {
-    StringBuffer buffer = new StringBuffer();
-    
+    StringBuffer buffer = new StringBuffer("B");
+    becomeAlivePossibilities.forEach(buffer::append);
+    buffer.append("/S");
+    stayAlivePossibilities.forEach(buffer::append);
     String result = buffer.toString();
-    if(specialRules.containsKey(result)) {
-      result = specialRules.get(result);
+    if(Rules.contains(result)) {
+      result = Rules.get(result);
     } else {
-      result.replace("/", "_");
+      result = result.replace("/", "_");
     }
     return result;
   }

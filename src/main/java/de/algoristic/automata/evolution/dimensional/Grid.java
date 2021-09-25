@@ -42,8 +42,16 @@ public class Grid {
   }
 
   public Point transpose(int oneDimensionalPosition) {
+    return transpose(oneDimensionalPosition, false);
+  }
+
+  public Point transpose(int oneDimensionalPosition, boolean traversing) {
     int x = oneDimensionalPosition % (xAxis + 1);
     int y = oneDimensionalPosition / (xAxis + 1);
-    return new Point(x, y, this);
+    if(traversing) {
+      return new TraversingPoint(x, y, this);
+    } else {
+      return new Point(x, y, this);
+    }
   }
 }

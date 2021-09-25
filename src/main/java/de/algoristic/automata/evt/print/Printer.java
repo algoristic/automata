@@ -69,7 +69,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
   protected BufferedImage getImage(int numberOfCells, int amountOfGenerations) {
     int width = (numberOfCells * size) + (numberOfCells * border) + border;
-    int height = (amountOfGenerations * size) + (numberOfCells * border) + border;
+    int height = (amountOfGenerations * size) + (amountOfGenerations * border) + border;
     BufferedImage image = Images.getColoredImage(width, height, backgroundColor);
     return image;
   }
