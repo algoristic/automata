@@ -19,15 +19,14 @@ public class ConwaysGameOfLifeTest {
   
   @ParameterizedTest
   @CsvSource(value = {
-    "spaceship, 19, true"/*,
-    "lobster, 349, true"*/})
+    "gosperglidergun, 59, false"})
   void seedTest(String seedFile, int runtime, boolean unlimitedSpace) {
     Seed seed = new TemplateFile("src/test/resources/" + seedFile + ".txt");
     GameOfLifePrinter printer = new GameOfLifePrinter(baseDirectory.resolve(seedFile + ".gif"));
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
-        .Builder(baseDirectory)
-        .withCallback(printer::addFile)
-        .buildEvolutionStepBuilder();
+      .Builder(baseDirectory)
+      .withCallback(printer::addFile)
+      .buildEvolutionStepBuilder();
     Automaton automaton = Automaton.Builder
       .gameOfLife()
       .withUnlimitedSpace(unlimitedSpace)
@@ -36,7 +35,7 @@ public class ConwaysGameOfLifeTest {
       .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();
-    printer.print(true, 100);
+    printer.print(false, 100);
   }
 
   @ParameterizedTest
