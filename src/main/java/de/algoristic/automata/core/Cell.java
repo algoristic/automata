@@ -1,35 +1,27 @@
 package de.algoristic.automata.core;
 
-import de.algoristic.automata.error.AutomatonException;
 import de.algoristic.automata.evolution.NeighborhoodParameters;
 import de.algoristic.automata.evolution.Rule;
 
 public class Cell {
 
-  public static final Character ALIVE = '1';
-  public static final Character DEAD = '0';
-
-  protected final boolean isAlive;
+  private State state;
   protected int age;
 
   private CellSpace cellSpace;
 
-  public Cell(final char state) {
+  public Cell(State state) {
     this.age = 0;
-    if (ALIVE.equals(state)) {
-      isAlive = true;
-    } else {
-      if (DEAD.equals(state)) {
-        isAlive = false;
-      } else {
-        throw new AutomatonException("could not instantiate cell, due to invalid state: \"" + state + "\"");
-      }
-    }
+    this.state = state;
   }
 
   public Cell(Cell cell) {
-    this.isAlive = cell.isAlive();
+    this.state = cell.getState();
     this.age = cell.getAge();
+  }
+
+  public State getState() {
+    return state;
   }
 
   public Cell stayAlive() {
@@ -41,10 +33,6 @@ public class Cell {
   public Neighborhood getNeighborhood(NeighborhoodParameters parameters) {
     Rule rule = parameters.getRule();
     return rule.getNeighborhood(this, parameters);
-  }
-
-  public boolean isAlive() {
-    return isAlive;
   }
 
   public int getAge() {
@@ -69,24 +57,24 @@ public class Cell {
     this.cellSpace = cellSpace;
   }
 
+  public boolean hasState(State state) {
+    return this.state.matches(state);
+  }
+
   public boolean matches(Cell other) {
     if (other != null) {
-      return !(this.isAlive() ^ other.isAlive());
+      return this.state.matches(other.getState());
     } else {
       return false;
     }
   }
 
   public boolean isDirectSuccessor(Cell other) {
-    if (other != null) {
-      return (this.isAlive() && other.isAlive());
-    } else {
-      return false;
-    }
+    return state.isSuccessor(other.getState());
   }
 
   @Override
   public String toString() {
-    return (isAlive ? ALIVE : DEAD).toString();
+    return String.valueOf(state.getRepresentation());
   }
 }

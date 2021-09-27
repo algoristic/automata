@@ -2,7 +2,9 @@ package de.algoristic.automata.evolution.util;
 
 import java.util.ArrayList;
 import java.util.List;
+import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Cell;
+import de.algoristic.automata.core.CellSupplier;
 import de.algoristic.automata.core.util.Cells;
 import de.algoristic.automata.evolution.Patterns;
 import de.algoristic.automata.evolution.RuleMetadata;
@@ -15,9 +17,11 @@ public class ElementaryRuleParser {
 
   private Patterns patterns;
   private RuleMetadata metadata;
+  private CellSupplier supplier;
 
   public ElementaryRuleParser(int decimalRule) {
     this.decimalRule = decimalRule;
+    this.supplier = new BinaryCellSupplier();
   }
 
   public Patterns parseRulePatterns() {
@@ -30,9 +34,9 @@ public class ElementaryRuleParser {
       int cellPatternValue = (numberOfPatterns - 1);
       for (int index = 0; index < numberOfPatterns; index++) {
     	String cellPatternTemplate = BinaryStringUtils.getBinaryString(cellPatternValue, neighborHood);
-    	List<Cell> cellPattern = Cells.of(cellPatternTemplate);
+    	List<Cell> cellPattern = Cells.of(cellPatternTemplate, supplier);
         char resultChar = binaryRuleString.charAt(index);
-        Cell resultCell = new Cell(resultChar);
+        Cell resultCell = supplier.apply(resultChar);
         RulePattern pattern = new RulePattern(cellPattern, resultCell);
         patternList.add(pattern);
         cellPatternValue--;

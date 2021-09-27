@@ -4,14 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.CellSpace;
+import de.algoristic.automata.core.CellSupplier;
 
 public abstract class Cells {
 
-  public static List<Cell> of(String seed) {
+  public static List<Cell> of(String seed, CellSupplier supplier) {
     List<Cell> cells = new ArrayList<>();
     for (int i = 0; i < seed.length(); i++) {
       char c = seed.charAt(i);
-      Cell cell = new Cell(c);
+      Cell cell = supplier.apply(c);
       cells.add(cell);
     }
     return cells;

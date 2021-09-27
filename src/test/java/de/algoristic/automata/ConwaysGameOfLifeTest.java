@@ -35,7 +35,7 @@ public class ConwaysGameOfLifeTest {
       .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();
-    printer.print(false, 100);
+    printer.print(true, 100);
   }
 
   @ParameterizedTest

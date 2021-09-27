@@ -7,6 +7,7 @@ import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
+import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.evt.FinishAutomationEvent;
@@ -35,7 +36,7 @@ public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
         int startX = calcStart(x);
         int startY = calcStart(y);
         int[] color;
-        if (cell.isAlive()) {
+        if (cell.hasState(BinaryState.ALIVE)) {
           color = alive;
         } else {
           color = dead;

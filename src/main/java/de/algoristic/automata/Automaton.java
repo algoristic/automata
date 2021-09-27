@@ -132,7 +132,7 @@ public class Automaton {
         }
       });
       String seed = buffer.toString();
-      generation = Generation.getGeneration(seed);
+      generation = Generation.getBinaryGeneration(seed);
       return this;
     }
 
@@ -146,7 +146,7 @@ public class Automaton {
         }
       });
       String seed = buffer.toString();
-      generation = Generation.getGeneration(seed);
+      generation = Generation.getBinaryGeneration(seed);
       return this;
     }
   }
@@ -165,7 +165,7 @@ public class Automaton {
     public Builder withSeed(Seed seed) {
       String content = seed.getContent();
       int verticalSpace = seed.getVerticalDimension();
-      generation = Generation.getGeneration(content, verticalSpace);
+      generation = Generation.getBinaryGeneration(content, verticalSpace);
       return this;
     }      
   }

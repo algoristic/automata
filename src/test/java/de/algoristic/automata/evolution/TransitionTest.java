@@ -13,7 +13,7 @@ public class TransitionTest {
   @Test
   void elementaryTransitionTest() {
     Rule rule = ElementaryRule.getInstance(30);
-    Generation parentalGeneration = Generation.getGeneration("0011100");
+    Generation parentalGeneration = Generation.getBinaryGeneration("0011100");
     Transition transition = new Transition(parentalGeneration, rule);
     Generation filialGeneration = transition.produceFilialGeneration();
     String s = "";
@@ -26,7 +26,7 @@ public class TransitionTest {
   @Test
   void gameOfLifeTest() {
     Rule rule = GameOfLifeRule.getInstance("B3/S23");
-    Generation parentalGeneration = Generation.getGeneration("010010010", 3);
+    Generation parentalGeneration = Generation.getBinaryGeneration("010010010", 3);
     Transition transition = new Transition(parentalGeneration, rule);
     Generation filialGeneration = transition.produceFilialGeneration();
     String s = "";

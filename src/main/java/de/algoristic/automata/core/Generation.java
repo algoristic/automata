@@ -15,13 +15,16 @@ public class Generation implements Iterable<Cell> {
     this.verticalSpace = verticalSpace;
   }
 
-  public static Generation getGeneration(String seed) {
-    List<Cell> cells = Cells.of(seed);
-    return getGeneration(cells, 1);
+  public static Generation getBinaryGeneration(String seed) {
+    return getBinaryGeneration(seed, 1);
   }
 
-  public static Generation getGeneration(String seed, int verticalSpace) {
-    List<Cell> cells = Cells.of(seed);
+  public static Generation getBinaryGeneration(String seed, int verticalSpace) {
+    return getGeneration(seed, verticalSpace, new BinaryCellSupplier());
+  }
+
+  public static Generation getGeneration(String seed, int verticalSpace, CellSupplier cellSupplier) {
+    List<Cell> cells = Cells.of(seed, cellSupplier);
     return getGeneration(cells, verticalSpace);
   }
 

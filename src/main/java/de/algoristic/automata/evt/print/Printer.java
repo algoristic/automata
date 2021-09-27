@@ -78,9 +78,9 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
     private final Path path;
     private String filename = "CA";
-    private Color backgroundColor = Color.black;
-    private Color aliveCellColor = Color.white;
-    private Color deadCellColor = Color.black;
+    private Color backgroundColor = Color.lightGray;
+    private Color aliveCellColor = Color.black;
+    private Color deadCellColor = Color.white;
     private int size = 10;
     private int border = 1;
     private int scaling = 1;
