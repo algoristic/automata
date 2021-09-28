@@ -14,8 +14,8 @@ import de.algoristic.automata.evt.FinishAutomationEvent;
 
 public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
 
-  public ElementaryPrinter(String filename, Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border, Consumer<File> callback) {
-    super(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
+  public ElementaryPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
+    super(filename, path, backgroundColor, colorMapping, size, border, callback);
   }
 
   @Override
@@ -27,8 +27,8 @@ public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
     BufferedImage image = getImage(numberOfCells, amountOfGenerations);
     int size = getSize();
     Path path = getPath();
-    int[] alive = getRgbArray(true);
-    int[] dead = getRgbArray(false);
+    int[] alive = getRgbArray(BinaryState.ALIVE);
+    int[] dead = getRgbArray(BinaryState.DEAD);
     for (int y = 0; y < amountOfGenerations; y++) {
       Generation generation = generations.get(y);
       for (int x = 0; x < numberOfCells; x++) {

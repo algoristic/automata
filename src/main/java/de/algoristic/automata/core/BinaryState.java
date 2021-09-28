@@ -1,13 +1,13 @@
 package de.algoristic.automata.core;
 
-public class BinaryState implements State {
+public class BinaryState extends AbstractState {
 
   public static State ALIVE = new BinaryState('1');
   public static State DEAD = new BinaryState('0');
   
   private final boolean isAlive;
 
-  public BinaryState(final char state) {
+  private BinaryState(final char state) {
     isAlive = (state == '1');
   }
 

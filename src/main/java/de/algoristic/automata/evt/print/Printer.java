@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Consumer;
+import de.algoristic.automata.core.State;
 import de.algoristic.automata.evt.AutomatonEvent;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
@@ -15,18 +16,16 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
   final private String filename;
   final private Path path;
   final private Color backgroundColor;
-  final private Color aliveCellColor;
-  final private Color deadCellColor;
+  final private ColorMapping colorMapping;
   final private int size;
   final private int border;
   final private Consumer<File> callback;
 
-  public Printer(String filename, Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border, Consumer<File> callback) {
+  public Printer(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
     this.filename = filename;
     this.path = path;
     this.backgroundColor = backgroundColor;
-    this.aliveCellColor = aliveCellColor;
-    this.deadCellColor = deadCellColor;
+    this.colorMapping = colorMapping;
     this.size = size;
     this.border = border;
     this.callback = callback;
@@ -52,13 +51,8 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     return ((n * size) + ((n + 1) * border));
   }
 
-  protected int[] getRgbArray(boolean alive) {
-    Color color;
-    if(alive) {
-      color = aliveCellColor;
-    } else {
-      color = deadCellColor;
-    }
+  protected int[] getRgbArray(State state) {
+    Color color = colorMapping.get(state);
     int rgb = color.getRGB();
     int[] rgbArray = new int[size];
     for (int i = 0; i < rgbArray.length; i++) {
@@ -79,8 +73,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     private final Path path;
     private String filename = "CA";
     private Color backgroundColor = Color.lightGray;
-    private Color aliveCellColor = Color.black;
-    private Color deadCellColor = Color.white;
+    private ColorMapping colorMapping = ColorMapping.BINARY;
     private int size = 10;
     private int border = 1;
     private int scaling = 1;
@@ -100,13 +93,8 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       return this;
     }
 
-    public Builder withAliveCellColor(Color aliveCellColor) {
-      this.aliveCellColor = aliveCellColor;
-      return this;
-    }
-
-    public Builder withDeadCellColor(Color deadCellColor) {
-      this.deadCellColor = deadCellColor;
+    public Builder withColorMapping(ColorMapping colorMapping) {
+      this.colorMapping = colorMapping;
       return this;
     }
 
@@ -133,13 +121,13 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     public Printer<FinishAutomationEvent> buildElementaryPrinter() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new ElementaryPrinter(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
+      return new ElementaryPrinter(filename, path, backgroundColor, colorMapping, size, border, callback);
     }
 
     public Printer<FinishBreedingEvent> buildEvolutionStepBuilder() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new GameOfLifeEvolutionStepPrinter(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
+      return new GameOfLifeEvolutionStepPrinter(filename, path, backgroundColor, colorMapping, size, border, callback);
     }
   }
 }

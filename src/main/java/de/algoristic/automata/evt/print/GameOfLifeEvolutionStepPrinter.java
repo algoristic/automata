@@ -17,8 +17,8 @@ import de.algoristic.automata.evt.FinishBreedingEvent;
 
 public class GameOfLifeEvolutionStepPrinter extends Printer<FinishBreedingEvent> {
 
-  public GameOfLifeEvolutionStepPrinter(String filename, Path path, Color backgroundColor, Color aliveCellColor, Color deadCellColor, int size, int border, Consumer<File> callback) {
-    super(filename, path, backgroundColor, aliveCellColor, deadCellColor, size, border, callback);
+  public GameOfLifeEvolutionStepPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
+    super(filename, path, backgroundColor, colorMapping, size, border, callback);
   }
 
   @Override
@@ -38,8 +38,8 @@ public class GameOfLifeEvolutionStepPrinter extends Printer<FinishBreedingEvent>
     BufferedImage image = getImage(grid.getRightBorder() + 1, grid.getLowerBorder() + 1);
     int size = getSize();
     Path path = getPath();
-    int[] alive = getRgbArray(true);
-    int[] dead = getRgbArray(false);
+    int[] alive = getRgbArray(BinaryState.ALIVE);
+    int[] dead = getRgbArray(BinaryState.DEAD);
     for(int x = 0; x <= grid.getRightBorder(); x++) {
       for(int y = 0; y <= grid.getLowerBorder(); y++) {
         Point p = new Point(x, y, grid);
