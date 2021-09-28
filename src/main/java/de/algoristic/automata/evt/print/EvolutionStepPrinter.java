@@ -7,17 +7,17 @@ import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.function.Consumer;
 import javax.imageio.ImageIO;
-import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
+import de.algoristic.automata.core.State;
 import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 
-public class GameOfLifeEvolutionStepPrinter extends Printer<FinishBreedingEvent> {
+public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
 
-  public GameOfLifeEvolutionStepPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
+  public EvolutionStepPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
     super(filename, path, backgroundColor, colorMapping, size, border, callback);
   }
 
@@ -38,8 +38,6 @@ public class GameOfLifeEvolutionStepPrinter extends Printer<FinishBreedingEvent>
     BufferedImage image = getImage(grid.getRightBorder() + 1, grid.getLowerBorder() + 1);
     int size = getSize();
     Path path = getPath();
-    int[] alive = getRgbArray(BinaryState.ALIVE);
-    int[] dead = getRgbArray(BinaryState.DEAD);
     for(int x = 0; x <= grid.getRightBorder(); x++) {
       for(int y = 0; y <= grid.getLowerBorder(); y++) {
         Point p = new Point(x, y, grid);
@@ -47,12 +45,8 @@ public class GameOfLifeEvolutionStepPrinter extends Printer<FinishBreedingEvent>
         Cell cell = generation.get(index);
         int startX = calcStart(x);
         int startY = calcStart(y);
-        int[] color;
-        if (cell.hasState(BinaryState.ALIVE)) {
-          color = alive;
-        } else {
-          color = dead;
-        }
+        State state = cell.getState();
+        int[] color = getRgbArray(state);
         image.setRGB(startX, startY, size, size, color, 0, 0);
       }
     }

@@ -127,7 +127,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     public Printer<FinishBreedingEvent> buildEvolutionStepBuilder() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new GameOfLifeEvolutionStepPrinter(filename, path, backgroundColor, colorMapping, size, border, callback);
+      return new EvolutionStepPrinter(filename, path, backgroundColor, colorMapping, size, border, callback);
     }
   }
 }

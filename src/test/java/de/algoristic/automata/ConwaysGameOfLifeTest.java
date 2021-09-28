@@ -7,7 +7,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import de.algoristic.automata.evolution.GameOfLifeRule;
 import de.algoristic.automata.evt.FinishBreedingEvent;
-import de.algoristic.automata.evt.print.GameOfLifePrinter;
+import de.algoristic.automata.evt.print.LifeCyclePrinter;
 import de.algoristic.automata.evt.print.Printer;
 import de.algoristic.automata.io.RandomSeed;
 import de.algoristic.automata.io.Seed;
@@ -22,7 +22,7 @@ public class ConwaysGameOfLifeTest {
     "gosperglidergun, 59, false"})
   void seedTest(String seedFile, int runtime, boolean unlimitedSpace) {
     Seed seed = new TemplateFile("src/test/resources/" + seedFile + ".txt");
-    GameOfLifePrinter printer = new GameOfLifePrinter(baseDirectory.resolve(seedFile + ".gif"));
+    LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(seedFile + ".gif"));
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
       .Builder(baseDirectory)
       .withCallback(printer::addFile)
@@ -42,7 +42,7 @@ public class ConwaysGameOfLifeTest {
   @ValueSource(strings = {"B3/S23"})
   void randomTest(String ruleString) {
     GameOfLifeRule rule = GameOfLifeRule.getInstance(ruleString);
-    GameOfLifePrinter printer = new GameOfLifePrinter(baseDirectory.resolve(rule + ".gif"));
+    LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(rule + ".gif"));
     Seed seed = new RandomSeed(75);
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
         .Builder(baseDirectory)

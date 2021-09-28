@@ -1,5 +1,6 @@
 package de.algoristic.automata.evolution.dimensional;
 
+import java.text.MessageFormat;
 import java.util.Arrays;
 import java.util.List;
 import java.util.function.Function;
@@ -16,6 +17,12 @@ public class Point {
     Point::upRight,
     Point::downLeft,
     Point::downRight);
+
+  private static List<Function<Point, Point>> vonNeumannNeighborhoodOperations = Arrays.asList(
+    Point::left,
+    Point::right,
+    Point::up,
+    Point::down);
 
   protected final int x;
   protected final int y;
@@ -34,6 +41,13 @@ public class Point {
 
   public List<Point> getMooreNeighborhood() {
     return mooreNeighborhoodOperations.stream()
+      .map(fn -> fn.apply(this))
+      .filter(Point::isValid)
+      .collect(Collectors.toList());
+  }
+
+  public List<Point> getVonNeumannNeiborhood() {
+    return vonNeumannNeighborhoodOperations.stream()
       .map(fn -> fn.apply(this))
       .filter(Point::isValid)
       .collect(Collectors.toList());
@@ -102,5 +116,23 @@ public class Point {
     isValid &= (y >= upperBorder);
     isValid &= (y <= lowerBorder);
     return isValid;
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if(obj instanceof Point) {
+      Point other = (Point) obj;
+      boolean equals = true;
+      equals &= (x == other.getX());
+      equals &= (y == other.getY());
+      return equals;
+    } else {
+      return false;
+    }
+  }
+
+  @Override
+  public String toString() {
+    return MessageFormat.format("[{0}, {1}]", x, y);
   }
 }

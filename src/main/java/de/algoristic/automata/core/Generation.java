@@ -4,6 +4,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 import de.algoristic.automata.core.util.Cells;
+import de.algoristic.automata.io.Seed;
 
 public class Generation implements Iterable<Cell> {
 
@@ -15,17 +16,11 @@ public class Generation implements Iterable<Cell> {
     this.verticalSpace = verticalSpace;
   }
 
-  public static Generation getBinaryGeneration(String seed) {
-    return getBinaryGeneration(seed, 1);
-  }
-
-  public static Generation getBinaryGeneration(String seed, int verticalSpace) {
-    return getGeneration(seed, verticalSpace, new BinaryCellSupplier());
-  }
-
-  public static Generation getGeneration(String seed, int verticalSpace, CellSupplier cellSupplier) {
-    List<Cell> cells = Cells.of(seed, cellSupplier);
-    return getGeneration(cells, verticalSpace);
+  public static Generation getGeneration(Seed seed, CellSupplier cellSupplier) {
+    String content = seed.getContent();
+    int verticalDimension = seed.getVerticalDimension();
+    List<Cell> cells = Cells.of(content, cellSupplier);
+    return getGeneration(cells, verticalDimension);
   }
 
   public static Generation getGeneration(List<Cell> cells, int verticalSpace) {

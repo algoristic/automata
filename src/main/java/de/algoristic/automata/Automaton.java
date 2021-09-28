@@ -2,21 +2,25 @@ package de.algoristic.automata;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 import java.util.stream.IntStream;
+import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Generation;
+import de.algoristic.automata.core.WireworldCellSupplier;
 import de.algoristic.automata.evolution.ElementaryRule;
 import de.algoristic.automata.evolution.GameOfLifeRule;
 import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.Rules;
 import de.algoristic.automata.evolution.Transition;
+import de.algoristic.automata.evolution.Wireworld;
 import de.algoristic.automata.evt.AutomatonEventListener;
 import de.algoristic.automata.evt.FinishAutomationEvent;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.evt.RegisteredEvents;
 import de.algoristic.automata.evt.StartAutomationEvent;
 import de.algoristic.automata.evt.StartBreedingEvent;
+import de.algoristic.automata.io.RandomSeed;
 import de.algoristic.automata.io.Seed;
+import de.algoristic.automata.io.StringSeed;
 
 public class Automaton {
 
@@ -105,6 +109,10 @@ public class Automaton {
       return new GameOfLifeBuilder(rule);
     }
 
+    public static WireworldBuilder wireworld() {
+      return new WireworldBuilder();
+    }
+
     public Builder withRuntime(int runtime) {
       this.runtime = runtime;
       return this;
@@ -122,17 +130,8 @@ public class Automaton {
     }
 
     public Builder chaotic(int range) {
-      Random random = new Random();
-      StringBuffer buffer = new StringBuffer();
-      IntStream.range(0, range).forEach(_i -> {
-        if(random.nextBoolean()) {
-          buffer.append('1');
-        } else {
-          buffer.append('0');
-        }
-      });
-      String seed = buffer.toString();
-      generation = Generation.getBinaryGeneration(seed);
+      Seed seed = new RandomSeed(range, 0);
+      generation = Generation.getGeneration(seed, new BinaryCellSupplier());
       return this;
     }
 
@@ -146,7 +145,7 @@ public class Automaton {
         }
       });
       String seed = buffer.toString();
-      generation = Generation.getBinaryGeneration(seed);
+      generation = Generation.getGeneration(new StringSeed(seed, 1), new BinaryCellSupplier());
       return this;
     }
   }
@@ -163,10 +162,25 @@ public class Automaton {
     }
 
     public Builder withSeed(Seed seed) {
-      String content = seed.getContent();
-      int verticalSpace = seed.getVerticalDimension();
-      generation = Generation.getBinaryGeneration(content, verticalSpace);
+      generation = Generation.getGeneration(seed, new BinaryCellSupplier());
       return this;
     }      
+  }
+
+  public static class WireworldBuilder extends Builder {
+
+    protected WireworldBuilder() {
+      super(new Wireworld());
+    }
+
+    public WireworldBuilder withUnlimitedSpace(boolean unlimitedSpace) {
+      ((Wireworld) rule).setSpaceUnlimited(unlimitedSpace);
+      return this;
+    }
+
+    public Builder withSeed(Seed seed) {
+      generation = Generation.getGeneration(seed, new WireworldCellSupplier());
+      return this;
+    }
   }
 }

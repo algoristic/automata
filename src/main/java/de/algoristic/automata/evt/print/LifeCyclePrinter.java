@@ -10,12 +10,12 @@ import java.util.List;
 import javax.imageio.ImageIO;
 import de.algoristic.automata.evt.print.AnimatedGIFWriter.GIFFrame;
 
-public class GameOfLifePrinter {
+public class LifeCyclePrinter {
 
   private final List<File> files;
   private final Path filepath;
 
-  public GameOfLifePrinter(Path filepath) {
+  public LifeCyclePrinter(Path filepath) {
     this.files = new ArrayList<>();
     this.filepath = filepath;
   }
