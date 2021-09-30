@@ -2,7 +2,7 @@ package de.algoristic.automata.core;
 
 import java.util.Iterator;
 import java.util.List;
-import de.algoristic.automata.evolution.Pattern;
+import de.algoristic.automata.evolution.wolframsuniverse.Pattern;
 
 public class Neighborhood implements Pattern, Iterable<Cell> {
 

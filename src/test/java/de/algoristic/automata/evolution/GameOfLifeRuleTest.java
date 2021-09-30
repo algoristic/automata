@@ -10,6 +10,7 @@ import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.Neighborhood;
+import de.algoristic.automata.evolution.gameoflife.GameOfLife;
 import de.algoristic.automata.io.StringSeed;
 
 public class GameOfLifeRuleTest {

@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.gameoflife;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -6,9 +6,10 @@ import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.Neighborhood;
+import de.algoristic.automata.evolution.NeighborhoodParameters;
+import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
-import de.algoristic.automata.evolution.util.GameOfLifeRuleParser;
 
 public class GameOfLife implements Rule {
 

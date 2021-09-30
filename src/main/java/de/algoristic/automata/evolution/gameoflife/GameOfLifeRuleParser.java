@@ -1,8 +1,7 @@
-package de.algoristic.automata.evolution.util;
+package de.algoristic.automata.evolution.gameoflife;
 
 import java.util.ArrayList;
 import java.util.List;
-import de.algoristic.automata.evolution.GameOfLife;
 
 public class GameOfLifeRuleParser {
 

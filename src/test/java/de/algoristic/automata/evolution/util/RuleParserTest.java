@@ -3,9 +3,11 @@ package de.algoristic.automata.evolution.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import de.algoristic.automata.evolution.GameOfLife;
-import de.algoristic.automata.evolution.Patterns;
-import de.algoristic.automata.evolution.RuleMetadata;
+import de.algoristic.automata.evolution.gameoflife.GameOfLife;
+import de.algoristic.automata.evolution.gameoflife.GameOfLifeRuleParser;
+import de.algoristic.automata.evolution.wolframsuniverse.ElementaryRuleParser;
+import de.algoristic.automata.evolution.wolframsuniverse.Patterns;
+import de.algoristic.automata.evolution.wolframsuniverse.RuleMetadata;
 
 public class RuleParserTest {
 

@@ -1,4 +1,6 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.gameoflife;
+
+import de.algoristic.automata.evolution.Rule;
 
 public enum Rules {
 

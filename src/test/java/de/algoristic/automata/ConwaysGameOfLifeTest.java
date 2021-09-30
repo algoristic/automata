@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import de.algoristic.automata.evolution.GameOfLife;
+import de.algoristic.automata.evolution.gameoflife.GameOfLife;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.evt.print.LifeCyclePrinter;
 import de.algoristic.automata.evt.print.Printer;

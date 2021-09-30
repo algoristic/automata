@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 public class RuleMetadata {
 

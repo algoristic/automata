@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.wireworld;
 
 import static de.algoristic.automata.core.WireworldState.CONDUCTOR;
 import static de.algoristic.automata.core.WireworldState.ELECTRON_HEAD;
@@ -13,6 +13,8 @@ import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.Neighborhood;
 import de.algoristic.automata.core.State;
+import de.algoristic.automata.evolution.NeighborhoodParameters;
+import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
 

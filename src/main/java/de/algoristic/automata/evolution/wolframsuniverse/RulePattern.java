@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 import java.util.List;
 import de.algoristic.automata.core.Cell;

@@ -6,8 +6,9 @@ import org.junit.jupiter.api.Test;
 import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
-import de.algoristic.automata.evolution.ElementaryCellularAutomaton;
 import de.algoristic.automata.evolution.Transition;
+import de.algoristic.automata.evolution.gameoflife.GameOfLife;
+import de.algoristic.automata.evolution.wolframsuniverse.ElementaryCellularAutomaton;
 import de.algoristic.automata.io.StringSeed;
 
 public class TransitionTest {

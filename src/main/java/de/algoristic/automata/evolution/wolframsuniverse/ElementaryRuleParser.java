@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution.util;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,9 +6,6 @@ import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.CellSupplier;
 import de.algoristic.automata.core.util.Cells;
-import de.algoristic.automata.evolution.Patterns;
-import de.algoristic.automata.evolution.RuleMetadata;
-import de.algoristic.automata.evolution.RulePattern;
 import de.algoristic.automata.util.BinaryStringUtils;
 
 public class ElementaryRuleParser {

@@ -1,11 +1,12 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Neighborhood;
-import de.algoristic.automata.evolution.util.ElementaryRuleParser;
+import de.algoristic.automata.evolution.NeighborhoodParameters;
+import de.algoristic.automata.evolution.Rule;
 
 public class ElementaryCellularAutomaton implements Rule {
 
