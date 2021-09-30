@@ -75,6 +75,10 @@ public class ElementaryCellularAutomaton implements Rule {
 
   @Override
   public String toString() {
-    return String.valueOf(decimalRule);
+    StringBuffer buffer = new StringBuffer();
+    buffer.append(decimalRule);
+    buffer.append("@");
+    buffer.append(this.hashCode());
+    return buffer.toString();
   }
 }

@@ -17,8 +17,8 @@ import de.algoristic.automata.evt.FinishBreedingEvent;
 
 public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
 
-  public EvolutionStepPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
-    super(filename, path, backgroundColor, colorMapping, size, border, callback);
+  public EvolutionStepPrinter(String filename, Path path, Color backgroundColor, Color frameColor, ColorMapping colorMapping, int size, int border, int frameWidth, Consumer<File> callback) {
+    super(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
   }
 
   @Override

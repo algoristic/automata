@@ -68,4 +68,12 @@ public class Wireworld implements Rule {
       .collect(Collectors.toList());
     return new Neighborhood(cell, neighbors);
   }
+
+  @Override
+  public String toString() {
+    StringBuffer buffer = new StringBuffer();
+    buffer.append("Wireworld@");
+    buffer.append(this.hashCode());
+    return buffer.toString();
+  }
 }

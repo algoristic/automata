@@ -14,8 +14,8 @@ import de.algoristic.automata.evt.FinishAutomationEvent;
 
 public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
 
-  public ElementaryPrinter(String filename, Path path, Color backgroundColor, ColorMapping colorMapping, int size, int border, Consumer<File> callback) {
-    super(filename, path, backgroundColor, colorMapping, size, border, callback);
+  public ElementaryPrinter(String filename, Path path, Color backgroundColor, Color frameColor, ColorMapping colorMapping, int size, int border, int frameWidth, Consumer<File> callback) {
+    super(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
   }
 
   @Override
