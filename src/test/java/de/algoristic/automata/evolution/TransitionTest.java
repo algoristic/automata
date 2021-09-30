@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
-import de.algoristic.automata.evolution.ElementaryRule;
+import de.algoristic.automata.evolution.ElementaryCellularAutomaton;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.io.StringSeed;
 
@@ -14,7 +14,7 @@ public class TransitionTest {
 
   @Test
   void elementaryTransitionTest() {
-    Rule rule = ElementaryRule.getInstance(30);
+    Rule rule = ElementaryCellularAutomaton.getInstance(30);
     Generation parentalGeneration = Generation.getGeneration(new StringSeed("0011100", 1), new BinaryCellSupplier());
     Transition transition = new Transition(parentalGeneration, rule);
     Generation filialGeneration = transition.produceFilialGeneration();
@@ -27,7 +27,7 @@ public class TransitionTest {
 
   @Test
   void gameOfLifeTest() {
-    Rule rule = GameOfLifeRule.getInstance("B3/S23");
+    Rule rule = GameOfLife.getInstance("B3/S23");
     Generation parentalGeneration = Generation.getGeneration(new StringSeed("010010010", 3), new BinaryCellSupplier());
     Transition transition = new Transition(parentalGeneration, rule);
     Generation filialGeneration = transition.produceFilialGeneration();

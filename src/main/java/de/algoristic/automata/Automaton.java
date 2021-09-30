@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.WireworldCellSupplier;
-import de.algoristic.automata.evolution.ElementaryRule;
-import de.algoristic.automata.evolution.GameOfLifeRule;
+import de.algoristic.automata.evolution.ElementaryCellularAutomaton;
+import de.algoristic.automata.evolution.GameOfLife;
 import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.Rules;
 import de.algoristic.automata.evolution.Transition;
@@ -84,11 +84,11 @@ public class Automaton {
     }
     
     public static WolframsUniverseBuilder wolframsUniverse(int decimalRule) {
-      Rule rule = ElementaryRule.getInstance(decimalRule);
+      Rule rule = ElementaryCellularAutomaton.getInstance(decimalRule);
       return new WolframsUniverseBuilder(rule);
     }
 
-    public static WolframsUniverseBuilder wolframsUniverse(ElementaryRule rule) {
+    public static WolframsUniverseBuilder wolframsUniverse(ElementaryCellularAutomaton rule) {
       return new WolframsUniverseBuilder(rule);
     }
 
@@ -101,11 +101,11 @@ public class Automaton {
     }
 
     public static GameOfLifeBuilder gameOfLife(String ruleString) {
-      Rule rule = GameOfLifeRule.getInstance(ruleString);
+      Rule rule = GameOfLife.getInstance(ruleString);
       return new GameOfLifeBuilder(rule);
     }
 
-    public static GameOfLifeBuilder gameOfLife(GameOfLifeRule rule) {
+    public static GameOfLifeBuilder gameOfLife(GameOfLife rule) {
       return new GameOfLifeBuilder(rule);
     }
 
@@ -157,7 +157,7 @@ public class Automaton {
     }
 
     public GameOfLifeBuilder withUnlimitedSpace(boolean unlimitedSpace) {
-      ((GameOfLifeRule) rule).setSpaceUnlimited(unlimitedSpace);
+      ((GameOfLife) rule).setSpaceUnlimited(unlimitedSpace);
       return this;
     }
 

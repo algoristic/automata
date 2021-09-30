@@ -7,13 +7,13 @@ import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Neighborhood;
 import de.algoristic.automata.evolution.util.ElementaryRuleParser;
 
-public class ElementaryRule implements Rule {
+public class ElementaryCellularAutomaton implements Rule {
 
   private final int decimalRule;
   private final RuleMetadata metadata;
   private final Patterns patterns;
 
-  private ElementaryRule(final int decimalRule, final RuleMetadata metadata, final Patterns patterns) {
+  private ElementaryCellularAutomaton(final int decimalRule, final RuleMetadata metadata, final Patterns patterns) {
     this.decimalRule = decimalRule;
     this.metadata = metadata;
     this.patterns = patterns;
@@ -23,7 +23,7 @@ public class ElementaryRule implements Rule {
     ElementaryRuleParser parser = new ElementaryRuleParser(decimalRule);
     RuleMetadata metadata = parser.calculateRuleMetadata();
     Patterns patterns = parser.parseRulePatterns();
-    return new ElementaryRule(decimalRule, metadata, patterns);
+    return new ElementaryCellularAutomaton(decimalRule, metadata, patterns);
   }
 
   @Override

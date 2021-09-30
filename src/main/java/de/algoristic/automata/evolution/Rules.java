@@ -26,7 +26,7 @@ public enum Rules {
   }
 
   public Rule get() {
-    return GameOfLifeRule.getInstance(ruleString);
+    return GameOfLife.getInstance(ruleString);
   }
 
   public static boolean contains(String ruleString) {

@@ -11,7 +11,7 @@ public class ColorMapping {
 
   final public static ColorMapping BINARY;
   final public static ColorMapping WIREWORLD;
-  
+
   static {
     BINARY = new ColorMapping();
     BINARY.put(BinaryState.ALIVE, Color.black);
@@ -24,18 +24,14 @@ public class ColorMapping {
     WIREWORLD.put(WireworldState.CONDUCTOR, Color.yellow);
   }
 
-  private Map<State, Color> mapping = new HashMap<>();
+  private Map<Character, Color> mapping = new HashMap<>();
 
   public Color put(State state, Color color) {
-    return mapping.put(state, color);
+    return mapping.put(state.getRepresentation(), color);
   }
 
   public Color get(State state) {
-    return mapping.get(state);
-  }
-
-  public Map<State, Color> getMapping() {
-    return mapping;
+    return mapping.get(state.getRepresentation());
   }
 
   public void flush() {

@@ -2,7 +2,7 @@ package de.algoristic.automata.evolution.util;
 
 import java.util.ArrayList;
 import java.util.List;
-import de.algoristic.automata.evolution.GameOfLifeRule;
+import de.algoristic.automata.evolution.GameOfLife;
 
 public class GameOfLifeRuleParser {
 
@@ -12,7 +12,7 @@ public class GameOfLifeRuleParser {
     this.ruleString = ruleString;
   }
 
-  public GameOfLifeRule parse() {
+  public GameOfLife parse() {
     String altRuleString = ruleString;
     boolean revert = false;
     if (altRuleString.startsWith("B")) revert = true;
@@ -40,7 +40,7 @@ public class GameOfLifeRuleParser {
       int val = Integer.valueOf(s);
       becomeAlive.add(val);
     }
-    return new GameOfLifeRule(stayAlive, becomeAlive);
+    return new GameOfLife(stayAlive, becomeAlive);
   }
 
 }

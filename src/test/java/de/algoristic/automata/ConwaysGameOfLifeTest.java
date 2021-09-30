@@ -5,7 +5,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import de.algoristic.automata.evolution.GameOfLifeRule;
+import de.algoristic.automata.evolution.GameOfLife;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.evt.print.LifeCyclePrinter;
 import de.algoristic.automata.evt.print.Printer;
@@ -41,7 +41,7 @@ public class ConwaysGameOfLifeTest {
   @ParameterizedTest
   @ValueSource(strings = {"B3/S23"})
   void randomTest(String ruleString) {
-    GameOfLifeRule rule = GameOfLifeRule.getInstance(ruleString);
+    GameOfLife rule = GameOfLife.getInstance(ruleString);
     LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(rule + ".gif"));
     Seed seed = new RandomSeed(75);
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer

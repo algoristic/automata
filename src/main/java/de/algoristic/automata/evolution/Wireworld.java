@@ -15,18 +15,18 @@ import de.algoristic.automata.evolution.dimensional.Point;
 
 public class Wireworld implements Rule {
 
-  private static Map<State, Function<List<Cell>, State>> transition;
+  private static Map<Character, Function<List<Cell>, State>> transition;
 
   static {
     transition = new HashMap<>();
-    transition.put(WireworldState.EMPTY, (ls) -> WireworldState.EMPTY);
-    transition.put(WireworldState.ELECTRON_HEAD, (ls) -> WireworldState.ELECTRON_TAIL);
-    transition.put(WireworldState.ELECTRON_TAIL, (ls) -> WireworldState.CONDUCTOR);
-    transition.put(WireworldState.CONDUCTOR, (ls) -> {
+    transition.put(WireworldState.EMPTY.getRepresentation(), (ls) -> WireworldState.EMPTY);
+    transition.put(WireworldState.ELECTRON_HEAD.getRepresentation(), (ls) -> WireworldState.ELECTRON_TAIL);
+    transition.put(WireworldState.ELECTRON_TAIL.getRepresentation(), (ls) -> WireworldState.CONDUCTOR);
+    transition.put(WireworldState.CONDUCTOR.getRepresentation(), (ls) -> {
       long count = ls.stream()
         .filter(cell -> cell.hasState(WireworldState.ELECTRON_HEAD))
         .count();
-      if((count <= 2) && (count > 1)) {
+      if((count <= 2) && (count >= 1)) {
         return WireworldState.ELECTRON_HEAD;
       } else {
         return WireworldState.CONDUCTOR;
@@ -46,7 +46,7 @@ public class Wireworld implements Rule {
     Cell cell = neighborhood.getCell();
     List<Cell> neighbors = neighborhood.getCells();
     State state = cell.getState();
-    Function<List<Cell>, State> transitionFunction = transition.get(state);
+    Function<List<Cell>, State> transitionFunction = transition.get(state.getRepresentation());
     state = transitionFunction.apply(neighbors);
     return new Cell(state);
   }

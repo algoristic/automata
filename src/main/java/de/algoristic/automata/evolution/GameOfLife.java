@@ -10,21 +10,21 @@ import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
 import de.algoristic.automata.evolution.util.GameOfLifeRuleParser;
 
-public class GameOfLifeRule implements Rule {
+public class GameOfLife implements Rule {
 
   private final List<Integer> stayAlivePossibilities;
   private final List<Integer> becomeAlivePossibilities;
 
   private boolean unlimitedSpace = false;
 
-  public GameOfLifeRule(
+  public GameOfLife(
       List<Integer> stayAlivePossibilities,
       List<Integer> becomeAlivePossibilities) {
     this.stayAlivePossibilities = stayAlivePossibilities;
     this.becomeAlivePossibilities = becomeAlivePossibilities;
   }
 
-  public static GameOfLifeRule getInstance(String ruleString) {
+  public static GameOfLife getInstance(String ruleString) {
     GameOfLifeRuleParser parser = new GameOfLifeRuleParser(ruleString);
     return parser.parse();
   }

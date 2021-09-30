@@ -23,7 +23,7 @@ public class GameOfLifeRuleTest {
       "0000011");
     String seed = grid.stream().collect(Collectors.joining());
     Generation generation = Generation.getGeneration(new StringSeed(seed, grid.size()), new BinaryCellSupplier());
-    Rule gameOfLife = new GameOfLifeRule(Arrays.asList(2, 3), Arrays.asList(3));
+    Rule gameOfLife = new GameOfLife(Arrays.asList(2, 3), Arrays.asList(3));
     {
       int idx = 9;
       NeighborhoodParameters params = new NeighborhoodParameters(gameOfLife, generation, idx);

@@ -16,5 +16,4 @@ public abstract class AbstractState implements State {
   public String toString() {
     return String.valueOf(getRepresentation());
   }
-  
 }

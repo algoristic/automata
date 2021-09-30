@@ -3,7 +3,7 @@ package de.algoristic.automata.evolution.util;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import de.algoristic.automata.evolution.GameOfLifeRule;
+import de.algoristic.automata.evolution.GameOfLife;
 import de.algoristic.automata.evolution.Patterns;
 import de.algoristic.automata.evolution.RuleMetadata;
 
@@ -59,7 +59,7 @@ public class RuleParserTest {
   })
   void gameOfLifeRuleParserTest(String ruleString, int stayAliveNum, int becomAliveNum) {
     GameOfLifeRuleParser parser = new GameOfLifeRuleParser(ruleString);
-    GameOfLifeRule rule = parser.parse();
+    GameOfLife rule = parser.parse();
     assertEquals(stayAliveNum, rule.getStayAlivePossibilities().size());
     assertEquals(becomAliveNum, rule.getBecomeAlivePossibilities().size());
   }

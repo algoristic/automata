@@ -17,7 +17,8 @@ public class WireworldTest {
 
   @ParameterizedTest
   @CsvSource(value = {
-    "wireworld_001, 25, false"})
+      "wireworld_001, 11, true",
+      "wirworld_xor, 17, false"})
   void basicTest(String seedFile, int runtime, boolean unlimitedSpace) {
     Seed seed = new TemplateFile("src/test/resources/" + seedFile + ".txt");
     LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(seedFile + ".gif"));
@@ -27,13 +28,13 @@ public class WireworldTest {
       .withColorMapping(ColorMapping.WIREWORLD)
       .buildEvolutionStepBuilder();
     Automaton automaton = Automaton.Builder
-        .wireworld()
-        .withUnlimitedSpace(unlimitedSpace)
-        .withSeed(seed)
-        .withRuntime(runtime)
-        .build();
-      automaton.registerFinishBreedingListener(automationStepPrinter);
-      automaton.run();
-      printer.print(false, 100);
+      .wireworld()
+      .withUnlimitedSpace(unlimitedSpace)
+      .withSeed(seed)
+      .withRuntime(runtime)
+      .build();
+    automaton.registerFinishBreedingListener(automationStepPrinter);
+    automaton.run();
+    printer.print(true, 100);
   }
 }
