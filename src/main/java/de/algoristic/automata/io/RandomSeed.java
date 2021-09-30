@@ -13,8 +13,7 @@ public class RandomSeed implements Seed {
   }
   
   public RandomSeed(int size) {
-    this.height = size;
-    init(size, size);
+    this(size, size);
   }
 
   private void init(int width, int height) {

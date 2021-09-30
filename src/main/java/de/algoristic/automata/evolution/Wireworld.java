@@ -1,5 +1,9 @@
 package de.algoristic.automata.evolution;
 
+import static de.algoristic.automata.core.WireworldState.CONDUCTOR;
+import static de.algoristic.automata.core.WireworldState.ELECTRON_HEAD;
+import static de.algoristic.automata.core.WireworldState.ELECTRON_TAIL;
+import static de.algoristic.automata.core.WireworldState.EMPTY;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,27 +13,27 @@ import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.Neighborhood;
 import de.algoristic.automata.core.State;
-import de.algoristic.automata.core.WireworldState;
 import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
 
+
 public class Wireworld implements Rule {
 
-  private static Map<Character, Function<List<Cell>, State>> transition;
+  private static Map<State, Function<List<Cell>, State>> transition;
 
   static {
     transition = new HashMap<>();
-    transition.put(WireworldState.EMPTY.getRepresentation(), (ls) -> WireworldState.EMPTY);
-    transition.put(WireworldState.ELECTRON_HEAD.getRepresentation(), (ls) -> WireworldState.ELECTRON_TAIL);
-    transition.put(WireworldState.ELECTRON_TAIL.getRepresentation(), (ls) -> WireworldState.CONDUCTOR);
-    transition.put(WireworldState.CONDUCTOR.getRepresentation(), (ls) -> {
+    transition.put(EMPTY, (ls) -> EMPTY);
+    transition.put(ELECTRON_HEAD, (ls) -> ELECTRON_TAIL);
+    transition.put(ELECTRON_TAIL, (ls) -> CONDUCTOR);
+    transition.put(CONDUCTOR, (ls) -> {
       long count = ls.stream()
-        .filter(cell -> cell.hasState(WireworldState.ELECTRON_HEAD))
+        .filter(cell -> cell.hasState(ELECTRON_HEAD))
         .count();
       if((count <= 2) && (count >= 1)) {
-        return WireworldState.ELECTRON_HEAD;
+        return ELECTRON_HEAD;
       } else {
-        return WireworldState.CONDUCTOR;
+        return CONDUCTOR;
       }
     });
     
@@ -46,7 +50,7 @@ public class Wireworld implements Rule {
     Cell cell = neighborhood.getCell();
     List<Cell> neighbors = neighborhood.getCells();
     State state = cell.getState();
-    Function<List<Cell>, State> transitionFunction = transition.get(state.getRepresentation());
+    Function<List<Cell>, State> transitionFunction = transition.get(state);
     state = transitionFunction.apply(neighbors);
     return new Cell(state);
   }

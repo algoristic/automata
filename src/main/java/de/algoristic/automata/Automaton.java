@@ -130,7 +130,7 @@ public class Automaton {
     }
 
     public Builder chaotic(int range) {
-      Seed seed = new RandomSeed(range, 0);
+      Seed seed = new RandomSeed(range, 1);
       generation = Generation.getGeneration(seed, new BinaryCellSupplier());
       return this;
     }

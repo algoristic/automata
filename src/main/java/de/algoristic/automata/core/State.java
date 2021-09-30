@@ -2,12 +2,12 @@ package de.algoristic.automata.core;
 
 public interface State {
 
-  char getRepresentation();
+  int getValue();
   boolean isSuccessor(State other);
   default boolean matches(State other) {
     if(other != null) {
-      char thisRepresentation = this.getRepresentation();
-      char otherRepresentation = other.getRepresentation();
+      int thisRepresentation = this.getValue();
+      int otherRepresentation = other.getValue();
       return (thisRepresentation == otherRepresentation);
     } else {
       return false;

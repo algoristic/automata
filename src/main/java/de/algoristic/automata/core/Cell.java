@@ -75,6 +75,6 @@ public class Cell {
 
   @Override
   public String toString() {
-    return String.valueOf(state.getRepresentation());
+    return String.valueOf(state.getValue());
   }
 }

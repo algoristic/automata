@@ -1,5 +1,6 @@
 package de.algoristic.automata;
 
+import java.awt.Color;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -14,6 +15,7 @@ public class WolframsUniverseTest {
   static Path chaoticDir = baseDirectory.resolve("chaotic");
   static Path simpleDir = baseDirectory.resolve("simple");
 
+  static Color CYAN = new Color(51, 204, 204);
   static Printer<FinishAutomationEvent> chaoticPrinter = new Printer.Builder(chaoticDir).buildElementaryPrinter();
   static Printer<FinishAutomationEvent> simplePrinter = new Printer.Builder(simpleDir).buildElementaryPrinter();
 

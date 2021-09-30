@@ -16,13 +16,13 @@ public class BinaryState extends AbstractState {
   }
 
   @Override
-  public char getRepresentation() {
-    return isAlive ? '1' : '0';
+  public int getValue() {
+    return isAlive ? 1 : 0;
   }
 
   @Override
   public boolean isSuccessor(State other) {
-    char representation = other.getRepresentation();
-    return isAlive && (representation == '1');
+    int representation = other.getValue();
+    return isAlive && (representation == 1);
   }
 }

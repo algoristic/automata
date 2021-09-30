@@ -24,14 +24,14 @@ public class ColorMapping {
     WIREWORLD.put(WireworldState.CONDUCTOR, Color.yellow);
   }
 
-  private Map<Character, Color> mapping = new HashMap<>();
+  private Map<State, Color> mapping = new HashMap<>();
 
   public Color put(State state, Color color) {
-    return mapping.put(state.getRepresentation(), color);
+    return mapping.put(state, color);
   }
 
   public Color get(State state) {
-    return mapping.get(state.getRepresentation());
+    return mapping.get(state);
   }
 
   public void flush() {

@@ -14,6 +14,6 @@ public abstract class AbstractState implements State {
 
   @Override
   public String toString() {
-    return String.valueOf(getRepresentation());
+    return String.valueOf(getValue());
   }
 }

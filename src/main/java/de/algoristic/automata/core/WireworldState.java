@@ -2,30 +2,37 @@ package de.algoristic.automata.core;
 
 import java.util.Arrays;
 
-public class WireworldState extends AbstractState {
+public enum WireworldState implements State {
 
-  private final static char E = '0';
-  private final static char H = 'h';
-  private final static char T = 't';
-  private final static char C = 'c';
+  EMPTY('0', 0),
+  ELECTRON_HEAD('h', 1),
+  ELECTRON_TAIL('t', 2),
+  CONDUCTOR('c', 3);
 
-  public static State EMPTY = new WireworldState(E);
-  public static State ELECTRON_HEAD = new WireworldState(H);
-  public static State ELECTRON_TAIL = new WireworldState(T);
-  public static State CONDUCTOR = new WireworldState(C);
+  private char constructor;
+  private int value;
 
-  public static boolean isValid(char representation) {
-    return Arrays.asList(H, T, C).contains(representation);
+  private WireworldState(char constructor, int value) {
+    this.constructor = constructor;
+    this.value = value;
   }
 
-  public static State valueOf(char representation) {
-    return new WireworldState(representation);
+
+  public static boolean isValid(char constructor) {
+    return Arrays.asList(values())
+      .stream()
+      .filter(state -> (state.constructor == constructor))
+      .findAny()
+      .isPresent();
   }
 
-  private final char representation;
-
-  private WireworldState(char representation) {
-    this.representation = representation;
+  public static State valueOf(char constructor) {
+    for (WireworldState state : values()) {
+      if (state.constructor == constructor) {
+        return state;
+      }
+    }
+    return EMPTY;
   }
 
   @Override
@@ -34,7 +41,7 @@ public class WireworldState extends AbstractState {
   }
 
   @Override
-  public char getRepresentation() {
-    return representation;
+  public int getValue() {
+    return value;
   }
 }
