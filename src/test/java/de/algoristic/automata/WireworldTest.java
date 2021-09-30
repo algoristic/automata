@@ -18,6 +18,7 @@ public class WireworldTest {
   @ParameterizedTest
   @CsvSource(value = {
       "wireworld_001, 11, true",
+      "wireworld_002, 21, true",
       "wirworld_xor, 17, false"})
   void basicTest(String seedFile, int runtime, boolean unlimitedSpace) {
     Seed seed = new TemplateFile("src/test/resources/" + seedFile + ".txt");
