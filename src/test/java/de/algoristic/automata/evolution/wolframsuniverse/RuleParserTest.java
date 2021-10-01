@@ -1,4 +1,4 @@
-package de.algoristic.automata.evolution.util;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.params.ParameterizedTest;

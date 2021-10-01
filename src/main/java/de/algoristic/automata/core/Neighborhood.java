@@ -7,7 +7,7 @@ import de.algoristic.automata.evolution.wolframsuniverse.Pattern;
 public class Neighborhood implements Pattern, Iterable<Cell> {
 
   private final Cell cell;
-  private final List<Cell> neightbors;
+  protected final List<Cell> neightbors;
 
   public Neighborhood(Cell cell, List<Cell> neighbors) {
     this.cell = cell;

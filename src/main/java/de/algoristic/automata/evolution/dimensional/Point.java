@@ -93,6 +93,26 @@ public class Point {
     return point.right();
   }
 
+  public boolean isLeft(Point point) {
+    Point right = this.right();
+    return right.equals(point);
+  }
+
+  public boolean isRight(Point point) {
+    Point left = this.left();
+    return left.equals(point);
+  }
+
+  public boolean isAbove(Point point) {
+    Point down = this.down();
+    return down.equals(point);
+  }
+
+  public boolean isBelow(Point point) {
+    Point up = this.up();
+    return up.equals(point);
+  }
+
   int getX() {
     return x;
   }
