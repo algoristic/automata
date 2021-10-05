@@ -8,7 +8,7 @@ import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.Seed;
 import de.algoristic.automata.io.TemplateFile;
-import de.algoristic.automata.printer.ColorMapping;
+import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.LifeCyclePrinter;
 import de.algoristic.automata.printer.Printer;
 
@@ -31,7 +31,7 @@ public class WireworldTest {
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
       .Builder(baseDirectory)
       .withCallback(printer::addFile)
-      .withColorMapping(ColorMapping.WIREWORLD)
+      .withColorMapping(ColorModel.WIREWORLD)
       .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
       .wireworld()

@@ -15,9 +15,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
   final private String filename;
   final private Path path;
-  final private Color backgroundColor;
-  final private Color frameColor;
-  final private ColorMapping colorMapping;
+  final private ColorModel colorModel;
   final private int size;
   final private int border;
   final private int frameWidth;
@@ -26,18 +24,14 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
   public Printer(
       String filename,
       Path path,
-      Color backgroundColor,
-      Color frameColor,
-      ColorMapping colorMapping,
+      ColorModel colorModel,
       int size,
       int border,
       int frameWidth,
       Consumer<File> callback) {
     this.filename = filename;
     this.path = path;
-    this.backgroundColor = backgroundColor;
-    this.frameColor = frameColor;
-    this.colorMapping = colorMapping;
+    this.colorModel = colorModel;
     this.size = size;
     this.border = border;
     this.frameWidth = frameWidth;
@@ -65,13 +59,14 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
   }
 
   protected int[] getRgbArray(State state) {
-    Color color = colorMapping.get(state);
+    Color color = colorModel.get(state);
     return getRgbArray(color, size);
   }
 
   protected BufferedImage getImage(int width, int height) {
     int widthInPixels = (width * size) + (width * border) + border + (2 * frameWidth);
     int heightInPixels = (height * size) + (height * border) + border + (2 * frameWidth);
+    Color backgroundColor = colorModel.getBackgroundColor();
     BufferedImage image = Images.getColoredImage(widthInPixels, heightInPixels, backgroundColor);
     fillFrame(image);
     return image;
@@ -80,6 +75,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
   private void fillFrame(BufferedImage image) {
     int imageWidth = image.getWidth();
     int imageHeight = image.getHeight();
+    Color frameColor = colorModel.getFrameColor();
     int[] widthRgbArray = getRgbArray(frameColor, imageWidth);
     int[] heightRgbArray = getRgbArray(frameColor, frameWidth);
     image.setRGB(0, 0, imageWidth, frameWidth, widthRgbArray, 0, 0);
@@ -101,9 +97,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
     private final Path path;
     private String filename = "CA";
-    private Color backgroundColor = Color.lightGray;
-    private Color frameColor = Color.CYAN;
-    private ColorMapping colorMapping = ColorMapping.BINARY;
+    private ColorModel colorMapping = ColorModel.BINARY;
     private int size = 10;
     private int border = 1;
     private int frameWidth = 20;
@@ -125,17 +119,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       return this;
     }
 
-    public Builder withBackgroundColor(Color backgroundColor) {
-      this.backgroundColor = backgroundColor;
-      return this;
-    }
-
-    public Builder withFrameColor(Color frameColor) {
-      this.frameColor = frameColor;
-      return this;
-    }
-
-    public Builder withColorMapping(ColorMapping colorMapping) {
+    public Builder withColorMapping(ColorModel colorMapping) {
       this.colorMapping = colorMapping;
       return this;
     }
@@ -168,7 +152,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     public Printer<FinishAutomationEvent> buildElementaryPrinter() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new ElementaryPrinter(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
+      return new ElementaryPrinter(filename, path, colorMapping, size, border, frameWidth, callback);
     }
 
     public Printer<FinishBreedingEvent> buildEvolutionStepPrinter() {
@@ -178,7 +162,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     public Printer<FinishBreedingEvent> buildEvolutionStepPrinter(int nthGeneration) {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new EvolutionStepPrinter(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback, nthGeneration);
+      return new EvolutionStepPrinter(filename, path, colorMapping, size, border, frameWidth, callback, nthGeneration);
     }
   }
 }

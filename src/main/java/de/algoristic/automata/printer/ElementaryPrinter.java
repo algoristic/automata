@@ -1,6 +1,5 @@
 package de.algoristic.automata.printer;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
@@ -14,8 +13,8 @@ import de.algoristic.automata.evt.FinishAutomationEvent;
 
 public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
 
-  public ElementaryPrinter(String filename, Path path, Color backgroundColor, Color frameColor, ColorMapping colorMapping, int size, int border, int frameWidth, Consumer<File> callback) {
-    super(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
+  public ElementaryPrinter(String filename, Path path, ColorModel colorMapping, int size, int border, int frameWidth, Consumer<File> callback) {
+    super(filename, path, colorMapping, size, border, frameWidth, callback);
   }
 
   @Override

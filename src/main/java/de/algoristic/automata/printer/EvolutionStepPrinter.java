@@ -1,6 +1,5 @@
 package de.algoristic.automata.printer;
 
-import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
@@ -19,8 +18,8 @@ public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
 
   private final int printNthGeneration;
 
-  public EvolutionStepPrinter(String filename, Path path, Color backgroundColor, Color frameColor, ColorMapping colorMapping, int size, int border, int frameWidth, Consumer<File> callback, int printNthGeneration) {
-    super(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
+  public EvolutionStepPrinter(String filename, Path path, ColorModel colorMapping, int size, int border, int frameWidth, Consumer<File> callback, int printNthGeneration) {
+    super(filename, path, colorMapping, size, border, frameWidth, callback);
     this.printNthGeneration = printNthGeneration;
   }
 

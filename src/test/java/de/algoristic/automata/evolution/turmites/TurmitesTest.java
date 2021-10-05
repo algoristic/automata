@@ -7,7 +7,7 @@ import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.AntSeed;
 import de.algoristic.automata.io.Seed;
-import de.algoristic.automata.printer.ColorMapping;
+import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.LifeCyclePrinter;
 import de.algoristic.automata.printer.Printer;
 
@@ -31,7 +31,7 @@ public class TurmitesTest {
       .Builder(baseDirectory)
       .withCallback(printer::addFile)
       .withFrameWidth(0)
-      .withColorMapping(ColorMapping.TURMITES(metadata))
+      .withColorMapping(ColorModel.TURMITES(metadata))
       .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
       .turmites(rule)
