@@ -1,12 +1,10 @@
-package de.algoristic.automata;
+package de.algoristic.automata.evolution.turmites;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
+import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evolution.RuleSupplier;
-import de.algoristic.automata.evolution.turmites.Rules;
-import de.algoristic.automata.evolution.turmites.Turmites;
-import de.algoristic.automata.evolution.turmites.TurmitesRuleMetadata;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.AntSeed;
 import de.algoristic.automata.io.Seed;
@@ -20,7 +18,7 @@ public class TurmitesTest {
 
   @Test
   void basicTest() {
-    Seed seed = new AntSeed(75);
+    Seed seed = new AntSeed(5);
     RuleSupplier supplier = Rules.LLRR;
     Turmites rule = ((Rules) supplier).getRule();
     TurmitesRuleMetadata metadata = rule.getMetadata();
@@ -31,15 +29,15 @@ public class TurmitesTest {
       .withCallback(printer::addFile)
       .withFrameWidth(0)
       .withColorMapping(ColorMapping.TURMITES(metadata))
-      .buildEvolutionStepBuilder(100);
+      .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
       .turmites(rule)
       .withSeed(seed)
-      .withRuntime(100000)
+      .withRuntime(10)
       .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();
-    printer.print(false, 25);
+    printer.print(25);
   }
   
 }

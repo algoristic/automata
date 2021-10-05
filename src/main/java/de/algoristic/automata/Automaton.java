@@ -1,6 +1,5 @@
 package de.algoristic.automata;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 import de.algoristic.automata.core.BinaryCellSupplier;
@@ -30,29 +29,28 @@ public class Automaton {
   private final Rule rule;
   private final int runtime;
 
-  private final List<Generation> generations = new ArrayList<>();
+  private final Memory memory;
   private final RegisteredEvents events = new RegisteredEvents();
 
-  private Automaton(final Generation initialGeneration, Rule rule, int runtime) {
+  private Automaton(final Generation initialGeneration, Rule rule, int runtime, boolean fullMemory) {
     this.rule = rule;
     this.runtime = runtime;
-    this.generations.add(initialGeneration);
+    this.memory = fullMemory ? new FullMemory(initialGeneration) : new PartialMemory(initialGeneration);
   }
 
   public String run() {
     events.throwStartAutomationEvent(new StartAutomationEvent(rule));
     for (int i = 0; i < runtime; i++) {
-      int lastGeneration = (generations.size() - 1);
-      Generation parentalGeneration = generations.get(lastGeneration);
+      Generation parentalGeneration = memory.getLastGeneration();
       events.throwStartBreedingEvent(new StartBreedingEvent(rule, parentalGeneration));
       Transition transition = new Transition(parentalGeneration, rule);
       Generation filialGeneration = transition.produceFilialGeneration();
       events.throwFinishBreedingEvent(new FinishBreedingEvent(i, rule, parentalGeneration, filialGeneration));
-      generations.add(filialGeneration);
+      memory.add(filialGeneration);
     }
+    List<Generation> generations = memory.getSavedGenerations();
     events.throwFinishAutomationEvent(new FinishAutomationEvent(this, generations));
-    int lastGeneration = (generations.size() - 1);
-    Generation result = generations.get(lastGeneration);
+    Generation result = memory.getLastGeneration();
     return result.toBinaryString();
   }
 
@@ -79,11 +77,13 @@ public class Automaton {
   public abstract static class Builder {
     
     protected final Rule rule;
+    protected final boolean fullMemory;
     protected Generation generation;
     protected int runtime = 0;
     
-    protected Builder(Rule rule) {
+    protected Builder(Rule rule, boolean fullMemory) {
       this.rule = rule;
+      this.fullMemory = fullMemory;
     }
     
     public static WolframsUniverseBuilder wolframsUniverse(int decimalRule) {
@@ -131,14 +131,14 @@ public class Automaton {
     }
 
     public Automaton build() {
-      return new Automaton(generation, rule, runtime);
+      return new Automaton(generation, rule, runtime, fullMemory);
     }
   }
 
   public static class WolframsUniverseBuilder extends Builder {
 
     protected WolframsUniverseBuilder(Rule rule) {
-      super(rule);
+      super(rule, true);
     }
 
     public Builder chaotic(int range) {
@@ -165,7 +165,7 @@ public class Automaton {
   public static class GameOfLifeBuilder extends Builder {
 
     protected GameOfLifeBuilder(Rule rule) {
-      super(rule);
+      super(rule, false);
     }
 
     public GameOfLifeBuilder withUnlimitedSpace(boolean unlimitedSpace) {
@@ -182,7 +182,7 @@ public class Automaton {
   public static class WireworldBuilder extends Builder {
 
     protected WireworldBuilder() {
-      super(new Wireworld());
+      super(new Wireworld(), false);
     }
 
     public WireworldBuilder withUnlimitedSpace(boolean unlimitedSpace) {
@@ -201,7 +201,7 @@ public class Automaton {
     private final TurmitesRuleMetadata metadata;
 
     protected TurmitesBuilder(Turmites turmites) {
-      super(turmites);
+      super(turmites, false);
       metadata = turmites.getMetadata();
     }
 

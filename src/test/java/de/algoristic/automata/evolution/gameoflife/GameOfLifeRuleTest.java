@@ -1,6 +1,7 @@
-package de.algoristic.automata.evolution;
+package de.algoristic.automata.evolution.gameoflife;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,7 +11,8 @@ import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.Neighborhood;
-import de.algoristic.automata.evolution.gameoflife.GameOfLife;
+import de.algoristic.automata.evolution.NeighborhoodParameters;
+import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.io.StringSeed;
 
 public class GameOfLifeRuleTest {

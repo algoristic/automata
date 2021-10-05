@@ -42,19 +42,5 @@ public class TurmiteRuleParserTest {
     Move move = pattern.getMove(state);
     Move expectedMove = Move.valueOf(resultCommand);
     assertEquals(expectedMove, move);
-
-    //loift
-    Direction left = Direction.LEFT;
-    Direction newDirection = move.modify(left);
-
-    TurmiteState newState = turmiteState;
-    System.out.println(newState.getValue());
-    FieldState newFieldState = new FieldState(newState, metadata);
-    newFieldState.flipField();
-    System.out.println(newState.getValue());
-    AntState newAntState = new AntState(newState, metadata);
-    newAntState.setAliveAnt(newDirection);
-    System.out.println(newState.getValue());
-    System.out.println("end");
   }
 }

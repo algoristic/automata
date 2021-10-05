@@ -1,9 +1,10 @@
-package de.algoristic.automata;
+package de.algoristic.automata.evolution.wireworld;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
+import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.Seed;
 import de.algoristic.automata.io.TemplateFile;
@@ -27,7 +28,7 @@ public class WireworldTest {
       .Builder(baseDirectory)
       .withCallback(printer::addFile)
       .withColorMapping(ColorMapping.WIREWORLD)
-      .buildEvolutionStepBuilder();
+      .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
       .wireworld()
       .withUnlimitedSpace(unlimitedSpace)

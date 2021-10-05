@@ -1,11 +1,11 @@
-package de.algoristic.automata;
+package de.algoristic.automata.evolution.gameoflife;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
-import de.algoristic.automata.evolution.gameoflife.GameOfLife;
+import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.RandomSeed;
 import de.algoristic.automata.io.Seed;
@@ -26,7 +26,7 @@ public class ConwaysGameOfLifeTest {
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
       .Builder(baseDirectory)
       .withCallback(printer::addFile)
-      .buildEvolutionStepBuilder();
+      .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
       .gameOfLife()
       .withUnlimitedSpace(unlimitedSpace)
@@ -43,15 +43,15 @@ public class ConwaysGameOfLifeTest {
   void randomTest(String ruleString) {
     GameOfLife rule = GameOfLife.getInstance(ruleString);
     LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(rule + ".gif"));
-    Seed seed = new RandomSeed(75);
+    Seed seed = new RandomSeed(25);
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
         .Builder(baseDirectory)
         .withCallback(printer::addFile)
-        .buildEvolutionStepBuilder();
+        .buildEvolutionStepPrinter();
     Automaton automaton = Automaton.Builder
         .gameOfLife(rule)
         .withSeed(seed)
-        .withRuntime(100)
+        .withRuntime(25)
         .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();

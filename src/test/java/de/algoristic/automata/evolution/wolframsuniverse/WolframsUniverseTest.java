@@ -1,4 +1,4 @@
-package de.algoristic.automata;
+package de.algoristic.automata.evolution.wolframsuniverse;
 
 import java.awt.Color;
 import java.nio.file.Path;
@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.util.Arrays;
 import java.util.List;
 import org.junit.jupiter.api.Test;
+import de.algoristic.automata.Automaton;
 import de.algoristic.automata.evt.FinishAutomationEvent;
 import de.algoristic.automata.printer.Printer;
 
