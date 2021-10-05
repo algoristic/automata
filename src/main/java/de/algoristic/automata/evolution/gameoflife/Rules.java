@@ -1,9 +1,8 @@
 package de.algoristic.automata.evolution.gameoflife;
 
-import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.RuleSupplier;
 
-public enum Rules implements RuleSupplier {
+public enum Rules implements RuleSupplier<GameOfLife> {
 
   SEEDS("B2/S"),
   CONWAYS_LIFE("B3/S23"),
@@ -30,7 +29,7 @@ public enum Rules implements RuleSupplier {
   }
 
   @Override
-  public Rule get() {
+  public GameOfLife get() {
     return GameOfLife.getInstance(ruleString);
   }
 

@@ -1,8 +1,8 @@
 package de.algoristic.automata.evolution;
 
-public interface RuleSupplier {
+public interface RuleSupplier<T extends Rule> {
 
   String getRuleString();
-  Rule get();
+  T get();
 
 }

@@ -112,6 +112,12 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
     public Builder(Path path) {
       this.path = path;
+      init();
+    }
+
+    private void init() {
+      File dir = path.toFile();
+      dir.mkdirs();
     }
 
     public Builder withFilename(String filename) {

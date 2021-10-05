@@ -4,7 +4,6 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 import de.algoristic.automata.Automaton;
-import de.algoristic.automata.evolution.RuleSupplier;
 import de.algoristic.automata.evt.FinishBreedingEvent;
 import de.algoristic.automata.io.AntSeed;
 import de.algoristic.automata.io.Seed;
@@ -23,8 +22,8 @@ public class TurmitesTest {
   @Test
   void basicTest() {
     Seed seed = new AntSeed(5);
-    RuleSupplier supplier = Rules.LLRR;
-    Turmites rule = ((Rules) supplier).getRule();
+    Rules supplier = Rules.LLRR;
+    Turmites rule = supplier.get();
     TurmitesRuleMetadata metadata = rule.getMetadata();
 
     LifeCyclePrinter printer = new LifeCyclePrinter(baseDirectory.resolve(supplier + ".gif"));

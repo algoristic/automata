@@ -7,6 +7,7 @@ import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.TurmitesCellSupplier;
 import de.algoristic.automata.core.WireworldCellSupplier;
 import de.algoristic.automata.evolution.Rule;
+import de.algoristic.automata.evolution.RuleSupplier;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.evolution.gameoflife.GameOfLife;
 import de.algoristic.automata.evolution.gameoflife.Rules;
@@ -96,11 +97,11 @@ public class Automaton {
     }
 
     public static GameOfLifeBuilder gameOfLife() {
-      return gameOfLifeBuilder(Rules.CONWAYS_LIFE);
+      return gameOfLife(Rules.CONWAYS_LIFE);
     }
 
-    public static GameOfLifeBuilder gameOfLifeBuilder(Rules rule) {
-      return new GameOfLifeBuilder(rule.get());
+    public static GameOfLifeBuilder gameOfLife(RuleSupplier<GameOfLife> supplier) {
+      return new GameOfLifeBuilder(supplier.get());
     }
 
     public static GameOfLifeBuilder gameOfLife(String ruleString) {

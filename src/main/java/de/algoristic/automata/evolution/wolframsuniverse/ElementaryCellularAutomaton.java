@@ -20,7 +20,7 @@ public class ElementaryCellularAutomaton implements Rule {
     this.patterns = patterns;
   }
 
-  public static Rule getInstance(final int decimalRule) {
+  public static ElementaryCellularAutomaton getInstance(final int decimalRule) {
     ElementaryRuleParser parser = new ElementaryRuleParser(decimalRule);
     RuleMetadata metadata = parser.calculateRuleMetadata();
     Patterns patterns = parser.parseRulePatterns();
