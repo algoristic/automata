@@ -5,11 +5,14 @@ import java.util.List;
 import java.util.stream.IntStream;
 import de.algoristic.automata.core.BinaryCellSupplier;
 import de.algoristic.automata.core.Generation;
+import de.algoristic.automata.core.TurmitesCellSupplier;
 import de.algoristic.automata.core.WireworldCellSupplier;
 import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.Transition;
 import de.algoristic.automata.evolution.gameoflife.GameOfLife;
 import de.algoristic.automata.evolution.gameoflife.Rules;
+import de.algoristic.automata.evolution.turmites.Turmites;
+import de.algoristic.automata.evolution.turmites.TurmitesRuleMetadata;
 import de.algoristic.automata.evolution.wireworld.Wireworld;
 import de.algoristic.automata.evolution.wolframsuniverse.ElementaryCellularAutomaton;
 import de.algoristic.automata.evt.AutomatonEventListener;
@@ -113,6 +116,15 @@ public class Automaton {
       return new WireworldBuilder();
     }
 
+    public static TurmitesBuilder turmites(Turmites turmites) {
+      return new TurmitesBuilder(turmites);
+    }
+
+    public static TurmitesBuilder turmites(String ruleString) {
+      Turmites turmites = Turmites.getInstance(ruleString);
+      return new TurmitesBuilder(turmites);
+    }
+
     public Builder withRuntime(int runtime) {
       this.runtime = runtime;
       return this;
@@ -180,6 +192,26 @@ public class Automaton {
 
     public Builder withSeed(Seed seed) {
       generation = Generation.getGeneration(seed, new WireworldCellSupplier());
+      return this;
+    }
+  }
+
+  public static class TurmitesBuilder extends Builder {
+
+    private final TurmitesRuleMetadata metadata;
+
+    protected TurmitesBuilder(Turmites turmites) {
+      super(turmites);
+      metadata = turmites.getMetadata();
+    }
+
+    public TurmitesBuilder withUnlimitedSpace(boolean unlimitedSpace) {
+      ((Turmites) rule).setSpaceUnlimited(unlimitedSpace);
+      return this;
+    }
+
+    public Builder withSeed(Seed seed) {
+      generation = Generation.getGeneration(seed, new TurmitesCellSupplier(metadata));
       return this;
     }
   }

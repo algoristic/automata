@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class TurmiteRuleParser {
+public class TurmitesRuleParser {
 
   static List<Character> validCommands;
   static {
@@ -18,7 +18,7 @@ public class TurmiteRuleParser {
 
   private String ruleString;
 
-  public TurmiteRuleParser(String ruleString) {
+  public TurmitesRuleParser(String ruleString) {
     init(ruleString);
   }
 
@@ -32,12 +32,12 @@ public class TurmiteRuleParser {
     this.ruleString = buffer.toString();
   }
 
-  public TurmiteRuleMetadata parseMetadata() {
+  public TurmitesRuleMetadata parseMetadata() {
     int cycles = ruleString.length();
     int cyclesBase = String.valueOf(cycles).length();
     int directionBase = (int) Math.pow(10, cyclesBase);
     int antBase = (int) Math.pow(10, ++cyclesBase);
-    return new TurmiteRuleMetadata(cycles, directionBase, antBase);
+    return new TurmitesRuleMetadata(cycles, directionBase, antBase);
   }
 
   public MovementPattern parseMovementPattern() {

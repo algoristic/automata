@@ -2,9 +2,9 @@ package de.algoristic.automata.evolution.turmites;
 
 public class StateCalculator {
 
-  private TurmiteRuleMetadata metadata;
+  private TurmitesRuleMetadata metadata;
 
-  public StateCalculator(TurmiteRuleMetadata metadata) {
+  public StateCalculator(TurmitesRuleMetadata metadata) {
     this.metadata = metadata;
   }
 

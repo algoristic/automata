@@ -10,14 +10,14 @@ import de.algoristic.automata.evolution.Rule;
 import de.algoristic.automata.evolution.dimensional.Grid;
 import de.algoristic.automata.evolution.dimensional.Point;
 
-public class Turmite implements Rule {
+public class Turmites implements Rule {
 
   private final MovementPattern movementPattern;
-  private final TurmiteRuleMetadata metadata;
+  private final TurmitesRuleMetadata metadata;
 
   private boolean unlimitedSpace = false;
 
-  public Turmite(MovementPattern movementPattern, TurmiteRuleMetadata metadata) {
+  public Turmites(MovementPattern movementPattern, TurmitesRuleMetadata metadata) {
     this.movementPattern = movementPattern;
     this.metadata = metadata;
   }
@@ -30,7 +30,7 @@ public class Turmite implements Rule {
     TurmiteState turmiteState = new TurmiteState(state);
     FieldState fieldState = new FieldState(turmiteState, metadata);
     if(AntState.isAlive(state, metadata)) { // the ant just moves away...
-      return new Cell(fieldState);
+      return new Cell(new TurmiteState(fieldState));
     } else {
       if(turmiteNeighborhood.hasNeighbor()) {
         // move ant to cell (if moving towards this direction)
@@ -42,7 +42,7 @@ public class Turmite implements Rule {
         Point antPosition = turmiteNeighborhood.getNeighborPosition();
         Direction direction = antState.getDirection();
         if(antMovesInThisDirection(thisPosition, antPosition, direction)) {
-          // rotate and based on color (cycle)
+          // rotate ant based on color (cycle)
           Move move = movementPattern.getMove(fieldState);
           Direction newDirection = move.modify(direction);
           TurmiteState newTurmiteState = new TurmiteState(turmiteState);
@@ -53,10 +53,10 @@ public class Turmite implements Rule {
           newState.setAliveAnt(newDirection);
           return new Cell(newTurmiteState);
         } else { // leave cell as is
-          return new Cell(state);
+          return new Cell(new TurmiteState(state));
         }
       } else {
-        return new Cell(state);
+        return new Cell(new TurmiteState(state));
       }
     }
   }
@@ -90,11 +90,22 @@ public class Turmite implements Rule {
     }
   }
 
-  void setSpaceUnlimited(boolean unlimitedSpace) {
+  public TurmitesRuleMetadata getMetadata() {
+    return metadata;
+  }
+
+  public void setSpaceUnlimited(boolean unlimitedSpace) {
     this.unlimitedSpace = unlimitedSpace;
   }
 
   private boolean antMovesInThisDirection(Point thisPosition, Point antPosition, Direction direction) {
     return direction.isOnCourse(antPosition, thisPosition);
+  }
+
+  public static Turmites getInstance(String ruleString) {
+    TurmitesRuleParser parser = new TurmitesRuleParser(ruleString);
+    TurmitesRuleMetadata metadata = parser.parseMetadata();
+    MovementPattern pattern = parser.parseMovementPattern();
+    return new Turmites(pattern, metadata);
   }
 }

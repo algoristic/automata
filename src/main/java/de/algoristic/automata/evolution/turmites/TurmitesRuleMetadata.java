@@ -1,12 +1,12 @@
 package de.algoristic.automata.evolution.turmites;
 
-public class TurmiteRuleMetadata {
+public class TurmitesRuleMetadata {
 
   private int cycles;
   private int directionBase;
   private int antBase;
 
-  TurmiteRuleMetadata(int cycles, int directionBase, int antBase) {
+  TurmitesRuleMetadata(int cycles, int directionBase, int antBase) {
     this.cycles = cycles;
     this.directionBase = directionBase;
     this.antBase = antBase;

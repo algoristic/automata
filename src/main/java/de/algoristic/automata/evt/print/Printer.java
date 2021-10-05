@@ -124,8 +124,18 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       return this;
     }
 
+    public Builder withFrameColor(Color frameColor) {
+      this.frameColor = frameColor;
+      return this;
+    }
+
     public Builder withColorMapping(ColorMapping colorMapping) {
       this.colorMapping = colorMapping;
+      return this;
+    }
+
+    public Builder withFrameWidth(int frameWidth) {
+      this.frameWidth = frameWidth;
       return this;
     }
 
@@ -156,9 +166,13 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     }
 
     public Printer<FinishBreedingEvent> buildEvolutionStepBuilder() {
+      return buildEvolutionStepBuilder(1);
+    }
+
+    public Printer<FinishBreedingEvent> buildEvolutionStepBuilder(int nthGeneration) {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new EvolutionStepPrinter(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback);
+      return new EvolutionStepPrinter(filename, path, backgroundColor, frameColor, colorMapping, size, border, frameWidth, callback, nthGeneration);
     }
   }
 }

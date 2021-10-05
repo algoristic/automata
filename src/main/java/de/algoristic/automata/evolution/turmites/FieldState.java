@@ -8,12 +8,12 @@ public class FieldState extends AbstractState {
   private final TurmiteState innerState;
   private final StateCalculator calculator;
 
-  public FieldState(TurmiteState innerState, TurmiteRuleMetadata metadata) {
+  public FieldState(TurmiteState innerState, TurmitesRuleMetadata metadata) {
     this.innerState = innerState;
     this.calculator = new StateCalculator(metadata);
   }
 
-  void flipField() {
+  public void flipField() {
     int value = innerState.getValue();
     int currentCycleState = calculator.getCycleState(value);
     int nextCycleState = calculator.getNextCycleState(currentCycleState);

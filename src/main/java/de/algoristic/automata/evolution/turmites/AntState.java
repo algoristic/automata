@@ -6,10 +6,10 @@ import de.algoristic.automata.core.State;
 public class AntState extends AbstractState {
 
   private final TurmiteState innerState;
-  private final TurmiteRuleMetadata metadata;
+  private final TurmitesRuleMetadata metadata;
   private final StateCalculator calculator;
 
-  public AntState(TurmiteState innerState, TurmiteRuleMetadata metadata) {
+  public AntState(TurmiteState innerState, TurmitesRuleMetadata metadata) {
     this.innerState = innerState;
     this.metadata = metadata;
     this.calculator = new StateCalculator(metadata);
@@ -26,7 +26,7 @@ public class AntState extends AbstractState {
     return calculator.containsAnt(value);
   }
 
-  void setAliveAnt(Direction direction) {
+  public void setAliveAnt(Direction direction) {
     int value = innerState.getValue();
     int newValue = calculator.setAliveAnt(value, direction);
     innerState.setValue(newValue);
@@ -58,11 +58,11 @@ public class AntState extends AbstractState {
     return (this.isAliveAnt() && otherAnt.isAliveAnt());
   }
 
-  public static boolean isAlive(State state, TurmiteRuleMetadata metadata) {
+  public static boolean isAlive(State state, TurmitesRuleMetadata metadata) {
     return alive(metadata).matches(state);
   }
 
-  public static State alive(TurmiteRuleMetadata metadata) {
+  public static State alive(TurmitesRuleMetadata metadata) {
     int value = metadata.getAntBase();
     TurmiteState innerState = new TurmiteState(value);
     return new AntState(innerState, metadata);

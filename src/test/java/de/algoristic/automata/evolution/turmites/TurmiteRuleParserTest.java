@@ -17,8 +17,8 @@ public class TurmiteRuleParserTest {
       "LLRRLLRLL, 9, 10, 100"
   })
   void parseRuleMetadata(String ruleString, int expectedCycles, int expectedDirectionBase, int expectedAntBase) {
-    TurmiteRuleParser parser = new TurmiteRuleParser(ruleString);
-    TurmiteRuleMetadata metadata = parser.parseMetadata();
+    TurmitesRuleParser parser = new TurmitesRuleParser(ruleString);
+    TurmitesRuleMetadata metadata = parser.parseMetadata();
     assertEquals(expectedCycles, metadata.getCycles());
     assertEquals(expectedDirectionBase, metadata.getDirectionBase());
     assertEquals(expectedAntBase, metadata.getAntBase());
@@ -34,8 +34,8 @@ public class TurmiteRuleParserTest {
       "LLRRLLRLL, 8, L"
   })
   void parseMovementPattern(String ruleString, int cycle, char resultCommand) {
-    TurmiteRuleParser parser = new TurmiteRuleParser(ruleString);
-    TurmiteRuleMetadata metadata = parser.parseMetadata();
+    TurmitesRuleParser parser = new TurmitesRuleParser(ruleString);
+    TurmitesRuleMetadata metadata = parser.parseMetadata();
     MovementPattern pattern = parser.parseMovementPattern();
     TurmiteState turmiteState = new TurmiteState(cycle);
     FieldState state = new FieldState(turmiteState, metadata);

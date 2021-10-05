@@ -11,7 +11,7 @@ public class TurmiteStateTest {
   @Test
   void flipCycleTest() {
     TurmiteState turmiteState = new TurmiteState(121);
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(2, 10, 100);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(2, 10, 100);
     FieldState state = new FieldState(turmiteState, metadata);
     state.flipField();
     assertEquals(0, state.getValue());
@@ -24,7 +24,7 @@ public class TurmiteStateTest {
   @Test
   void flipHigherCycleTest() {
     TurmiteState turmiteState = new TurmiteState(1211);
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(14, 100, 1000);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(14, 100, 1000);
     FieldState state = new FieldState(turmiteState, metadata);
     state.flipField();
     assertEquals(12, state.getValue());
@@ -40,7 +40,7 @@ public class TurmiteStateTest {
   @Test
   void fieldWithoutAntTest() {
     TurmiteState turmiteState = new TurmiteState(11);
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(14, 100, 1000);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(14, 100, 1000);
     FieldState state = new FieldState(turmiteState, metadata);
     state.flipField();
     assertEquals(12, state.getValue());
@@ -50,14 +50,14 @@ public class TurmiteStateTest {
   @Test
   void aliveAntTest() {
     TurmiteState turmiteState = new TurmiteState(121);
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(2, 10, 100);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(2, 10, 100);
     AntState state = new AntState(turmiteState, metadata);
     assertTrue(state.isAliveAnt());
   }
 
   @Test
   void stateMatchingTest() {
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(2, 10, 100);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(2, 10, 100);
     State state_1 = new TurmiteState(121);
     State state_2 = new TurmiteState(1);
     assertTrue(AntState.isAlive(state_1, metadata));
@@ -67,7 +67,7 @@ public class TurmiteStateTest {
   @Test
   void deadAntTest() {
     TurmiteState turmiteState = new TurmiteState(11);
-    TurmiteRuleMetadata metadata = new TurmiteRuleMetadata(14, 100, 1000);
+    TurmitesRuleMetadata metadata = new TurmitesRuleMetadata(14, 100, 1000);
     AntState state = new AntState(turmiteState, metadata);
     assertFalse(state.isAliveAnt());
   }
