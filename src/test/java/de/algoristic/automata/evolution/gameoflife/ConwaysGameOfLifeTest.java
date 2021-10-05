@@ -15,8 +15,12 @@ import de.algoristic.automata.printer.Printer;
 
 public class ConwaysGameOfLifeTest {
 
-  static Path baseDirectory = Paths.get("C:/Users/male233/Desktop/automata/game_of_life");
-  
+  static Path baseDirectory = Paths.get("C:/Users/male233/.automata-tests/game_of_life");
+
+  static {
+    baseDirectory.toFile().mkdirs();
+  }
+
   @ParameterizedTest
   @CsvSource(value = {
     "gosperglidergun, 59, false"})

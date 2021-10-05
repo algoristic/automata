@@ -75,7 +75,7 @@ public class Wireworld implements Rule {
   public String toString() {
     StringBuffer buffer = new StringBuffer();
     buffer.append("Wireworld@");
-    buffer.append(this.hashCode());
+//    buffer.append(this.hashCode());
     return buffer.toString();
   }
 }

@@ -78,8 +78,8 @@ public class ElementaryCellularAutomaton implements Rule {
   public String toString() {
     StringBuffer buffer = new StringBuffer();
     buffer.append(decimalRule);
-    buffer.append("@");
-    buffer.append(this.hashCode());
+//    buffer.append("@");
+//    buffer.append(this.hashCode());
     return buffer.toString();
   }
 }

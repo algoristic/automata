@@ -89,8 +89,8 @@ public class GameOfLife implements Rule {
     becomeAlivePossibilities.forEach(buffer::append);
     buffer.append("/S");
     stayAlivePossibilities.forEach(buffer::append);
-    buffer.append("@");
-    buffer.append(this.hashCode());
+//    buffer.append("@");
+//    buffer.append(this.hashCode());
     String result = buffer.toString();
     if(Rules.contains(result)) {
       result = Rules.get(result);

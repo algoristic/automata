@@ -14,7 +14,11 @@ import de.algoristic.automata.printer.Printer;
 
 public class TurmitesTest {
 
-  static Path baseDirectory = Paths.get("C:/Users/male233/Desktop/automata/turmites");
+  static Path baseDirectory = Paths.get("C:/Users/male233/.automata-tests/turmites");
+
+  static {
+    baseDirectory.toFile().mkdirs();
+  }
 
   @Test
   void basicTest() {

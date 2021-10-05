@@ -12,9 +12,14 @@ import de.algoristic.automata.printer.Printer;
 
 public class WolframsUniverseTest {
 
-  static Path baseDirectory = Paths.get("C:/Users/male233/Desktop/automata/elementary");
-  static Path chaoticDir = baseDirectory.resolve("chaotic");
-  static Path simpleDir = baseDirectory.resolve("simple");
+  static Path baseDirectory = Paths.get("C:/Users/male233/.automata-tests");
+  static Path chaoticDir = baseDirectory.resolve("elementary-chaotic");
+  static Path simpleDir = baseDirectory.resolve("elementary-simple");
+
+  static {
+    chaoticDir.toFile().mkdirs();
+    simpleDir.toFile().mkdirs();
+  }
 
   static Color CYAN = new Color(51, 204, 204);
   static Printer<FinishAutomationEvent> chaoticPrinter = new Printer.Builder(chaoticDir).buildElementaryPrinter();

@@ -14,7 +14,11 @@ import de.algoristic.automata.printer.Printer;
 
 public class WireworldTest {
 
-  static Path baseDirectory = Paths.get("C:/Users/male233/Desktop/automata/wireworld");
+  static Path baseDirectory = Paths.get("C:/Users/male233/.automata-tests/wireworld");
+
+  static {
+    baseDirectory.toFile().mkdirs();
+  }
 
   @ParameterizedTest
   @CsvSource(value = {
