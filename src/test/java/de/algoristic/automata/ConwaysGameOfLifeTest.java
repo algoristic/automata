@@ -7,11 +7,11 @@ import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import de.algoristic.automata.evolution.gameoflife.GameOfLife;
 import de.algoristic.automata.evt.FinishBreedingEvent;
-import de.algoristic.automata.evt.print.LifeCyclePrinter;
-import de.algoristic.automata.evt.print.Printer;
 import de.algoristic.automata.io.RandomSeed;
 import de.algoristic.automata.io.Seed;
 import de.algoristic.automata.io.TemplateFile;
+import de.algoristic.automata.printer.LifeCyclePrinter;
+import de.algoristic.automata.printer.Printer;
 
 public class ConwaysGameOfLifeTest {
 

@@ -8,11 +8,11 @@ import de.algoristic.automata.evolution.turmites.Rules;
 import de.algoristic.automata.evolution.turmites.Turmites;
 import de.algoristic.automata.evolution.turmites.TurmitesRuleMetadata;
 import de.algoristic.automata.evt.FinishBreedingEvent;
-import de.algoristic.automata.evt.print.ColorMapping;
-import de.algoristic.automata.evt.print.LifeCyclePrinter;
-import de.algoristic.automata.evt.print.Printer;
 import de.algoristic.automata.io.AntSeed;
 import de.algoristic.automata.io.Seed;
+import de.algoristic.automata.printer.ColorMapping;
+import de.algoristic.automata.printer.LifeCyclePrinter;
+import de.algoristic.automata.printer.Printer;
 
 public class TurmitesTest {
 

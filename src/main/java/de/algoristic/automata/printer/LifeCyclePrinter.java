@@ -1,4 +1,4 @@
-package de.algoristic.automata.evt.print;
+package de.algoristic.automata.printer;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
 import javax.imageio.ImageIO;
-import de.algoristic.automata.evt.print.AnimatedGIFWriter.GIFFrame;
+import de.algoristic.automata.printer.AnimatedGIFWriter.GIFFrame;
 
 public class LifeCyclePrinter {
 

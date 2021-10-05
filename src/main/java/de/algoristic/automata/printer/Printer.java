@@ -1,4 +1,4 @@
-package de.algoristic.automata.evt.print;
+package de.algoristic.automata.printer;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;

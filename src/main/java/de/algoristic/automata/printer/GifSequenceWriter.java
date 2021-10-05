@@ -1,4 +1,4 @@
-package de.algoristic.automata.evt.print;
+package de.algoristic.automata.printer;
 
 import java.awt.image.RenderedImage;
 import java.io.IOException;

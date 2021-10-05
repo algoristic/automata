@@ -5,11 +5,11 @@ import java.nio.file.Paths;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import de.algoristic.automata.evt.FinishBreedingEvent;
-import de.algoristic.automata.evt.print.ColorMapping;
-import de.algoristic.automata.evt.print.LifeCyclePrinter;
-import de.algoristic.automata.evt.print.Printer;
 import de.algoristic.automata.io.Seed;
 import de.algoristic.automata.io.TemplateFile;
+import de.algoristic.automata.printer.ColorMapping;
+import de.algoristic.automata.printer.LifeCyclePrinter;
+import de.algoristic.automata.printer.Printer;
 
 public class WireworldTest {
 
