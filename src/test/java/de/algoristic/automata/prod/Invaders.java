@@ -11,25 +11,26 @@ import de.algoristic.automata.io.TemplateFile;
 import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
-import de.algoristic.automata.prod.util.GameOfLife;
+import de.algoristic.automata.prod.util.Automation;
 
 public class Invaders {
 
-  @GameOfLife
+  Path desktop = Paths.get("C:/Users/male233/.automata/spaceinvader");
+  Seed seed = new TemplateFile("src/test/resources/invader.txt");
+
+  ColorModel colors = new Coolors()
+    .withMapping(BinaryState.DEAD, Coolors.black)
+    .withMapping(BinaryState.ALIVE, Coolors.orangeWeb)
+    .withBackground(Coolors.oxfordBlue)
+    .withFrameColor(Coolors.oxfordBlue)
+    .build();
+
+  Printer<FinishBreedingEvent> listener = new Printer.Builder(desktop)
+    .withColorMapping(colors)
+    .buildEvolutionStepPrinter();
+
+  @Automation
   void invaders() {
-    Path desktop = Paths.get("C:/Users/male233/Desktop/.automata/invaders");
-    Seed seed = new TemplateFile("src/test/resources/prod/invader.txt");
-
-    ColorModel colors = new Coolors()
-      .withMapping(BinaryState.DEAD, Coolors.black)
-      .withMapping(BinaryState.ALIVE, Coolors.orangeWeb)
-      .withBackground(Coolors.oxfordBlue)
-      .build();
-
-    Printer<FinishBreedingEvent> listener = new Printer.Builder(desktop)
-      .withColorMapping(colors)
-      .buildEvolutionStepPrinter();
-
     Automaton automaton = Automaton.Builder
       .gameOfLife(Rules.CONWAYS_LIFE)
       .withSeed(seed)

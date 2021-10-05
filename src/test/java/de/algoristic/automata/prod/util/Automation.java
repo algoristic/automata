@@ -9,6 +9,6 @@ import org.junit.jupiter.api.Test;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Test
-public @interface GameOfLife {
+public @interface Automation {
 
 }
