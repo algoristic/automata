@@ -5,7 +5,7 @@ import java.awt.image.BufferedImage;
 
 public abstract class Images {
 
-  private static final int TYPE = BufferedImage.TYPE_INT_RGB;
+  private static final int TYPE = BufferedImage.TYPE_INT_ARGB;
 
   public static BufferedImage blackImage(int width, int height) {
     return getColoredImage(width, height, Color.black);

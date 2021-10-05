@@ -1,5 +1,6 @@
 package de.algoristic.automata.prod;
 
+import java.awt.Color;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import de.algoristic.automata.Automaton;
@@ -19,14 +20,17 @@ public class Invaders {
   Seed seed = new TemplateFile("src/test/resources/invader.txt");
 
   ColorModel colors = new Coolors()
-    .withMapping(BinaryState.DEAD, Coolors.black)
-    .withMapping(BinaryState.ALIVE, Coolors.orangeWeb)
-    .withBackground(Coolors.oxfordBlue)
-    .withFrameColor(Coolors.oxfordBlue)
+    .withMapping(BinaryState.DEAD, Coolors.transparent)
+    .withMapping(BinaryState.ALIVE, Coolors.burntSienna)
+    .withBackground(Coolors.transparent)
+    .withFrameColor(Coolors.bdazzledBlue)
     .build();
 
   Printer<FinishBreedingEvent> listener = new Printer.Builder(desktop)
     .withColorMapping(colors)
+    .withFrameWidth(3)
+    .withCellSize(9)
+    .withScaling(5)
     .buildEvolutionStepPrinter();
 
   @Automation

@@ -8,9 +8,13 @@ import de.algoristic.automata.evolution.turmites.TurmitesRuleMetadata;
 
 public class Coolors {
 
+  public static Color transparent = new Color(0, 0, 0, 0);
+  public static Color white = new Color(0, 0, 0);
   public static Color black = new Color(0, 0, 0);
   public static Color oxfordBlue = new Color(20, 33, 61);
+  public static Color bdazzledBlue = new Color(61, 90, 128);
   public static Color orangeWeb = new Color(252, 163, 17);
+  public static Color burntSienna = new Color(238, 108, 77);
 
   protected Color backgroundColor = Color.lightGray;
   protected Color frameColor = Color.lightGray;
