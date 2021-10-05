@@ -1,6 +1,5 @@
 package de.algoristic.automata.prod;
 
-import java.awt.Color;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import de.algoristic.automata.Automaton;
