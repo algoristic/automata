@@ -14,14 +14,8 @@ public class StateCalculator {
     return cycleState;
   }
 
-  public int getNextCycleState(int cycleState) {
-    int cycles = metadata.getCycles();
-    if (cycleState == (cycles - 1)) {
-      cycleState = 0;
-    } else {
-      cycleState++;
-    }
-    return cycleState;
+  public int getNextCycleState(int cycle) {
+    return ++cycle % metadata.getCycles();
   }
 
   public int getDirection(int stateValue) {
