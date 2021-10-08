@@ -19,6 +19,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
   final private int size;
   final private int border;
   final private int frameWidth;
+  final private String format;
   final private Consumer<File> callback;
 
   public Printer(
@@ -28,6 +29,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       int size,
       int border,
       int frameWidth,
+      String format,
       Consumer<File> callback) {
     this.filename = filename;
     this.path = path;
@@ -35,6 +37,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     this.size = size;
     this.border = border;
     this.frameWidth = frameWidth;
+    this.format = format;
     this.callback = callback;
   }
 
@@ -48,6 +51,10 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
 
   protected int getSize() {
     return size;
+  }
+
+  protected String getFormat() {
+    return format;
   }
 
   protected void callback(File file) {
@@ -103,6 +110,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     private int frameWidth = 20;
     private int scaling = 1;
     private Consumer<File> callback = (file) -> {};
+    private String format = "gif";
 
     public Builder(Path path) {
       this.path = path;
@@ -144,6 +152,11 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       return this;
     }
 
+    public Builder withFormat(String format) {
+      this.format = format;
+      return this;
+    }
+
     public Builder withCallback(Consumer<File> callback) {
       this.callback = callback;
       return this;
@@ -152,7 +165,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     public Printer<FinishAutomationEvent> buildElementaryPrinter() {
       int size = (this.size * scaling);
       int border = (this.border * scaling);
-      return new ElementaryPrinter(filename, path, colorMapping, size, border, frameWidth, callback);
+      return new ElementaryPrinter(filename, path, colorMapping, size, border, frameWidth, format, callback);
     }
 
     public Printer<FinishBreedingEvent> buildEvolutionStepPrinter() {
@@ -163,7 +176,7 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
       int size = (this.size * scaling);
       int border = (this.border * scaling);
       int frame = (this.frameWidth * scaling);
-      return new EvolutionStepPrinter(filename, path, colorMapping, size, border, frame, callback, nthGeneration);
+      return new EvolutionStepPrinter(filename, path, colorMapping, size, border, frame, format, callback, nthGeneration);
     }
   }
 }

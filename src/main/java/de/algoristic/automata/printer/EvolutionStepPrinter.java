@@ -18,8 +18,8 @@ public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
 
   private final int printNthGeneration;
 
-  public EvolutionStepPrinter(String filename, Path path, ColorModel colorMapping, int size, int border, int frameWidth, Consumer<File> callback, int printNthGeneration) {
-    super(filename, path, colorMapping, size, border, frameWidth, callback);
+  public EvolutionStepPrinter(String filename, Path path, ColorModel colorMapping, int size, int border, int frameWidth, String format, Consumer<File> callback, int printNthGeneration) {
+    super(filename, path, colorMapping, size, border, frameWidth, format, callback);
     this.printNthGeneration = printNthGeneration;
   }
 
@@ -54,12 +54,13 @@ public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
         }
       }
       String name = getFilename();
+      String format = getFormat();
       String paddedSteps = padLeft(step, 6);
-      String filename = MessageFormat.format("{0}_{1}_{2}.gif", rule, name, paddedSteps);
+      String filename = MessageFormat.format("{0}_{1}_{2}.{3}", rule, name, paddedSteps, format);
       Path imagePath = path.resolve(filename);
       File imageFile = imagePath.toFile();
       try {
-        ImageIO.write(image, "gif", imageFile);
+        ImageIO.write(image, format, imageFile);
       } catch (Exception e) {
         e.printStackTrace();
       }

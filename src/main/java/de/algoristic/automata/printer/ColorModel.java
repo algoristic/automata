@@ -32,12 +32,12 @@ public class ColorModel {
       .build(metadata);
   }
 
-  final protected Map<Integer, Color> mapping;
+  final protected Map<Integer, ColorMapping> mappings;
   final private Color backgroundColor;
   final private Color frameColor;
 
-  public ColorModel(Map<Integer, Color> mapping, Color backgroundColor, Color frameColor) {
-    this.mapping = mapping;
+  public ColorModel(Map<Integer, ColorMapping> mappings, Color backgroundColor, Color frameColor) {
+    this.mappings = mappings;
     this.backgroundColor = backgroundColor;
     this.frameColor = frameColor;
   }
@@ -52,15 +52,16 @@ public class ColorModel {
 
   public Color get(State state) {
     Integer key = state.getValue();
-    return mapping.get(key);
+    ColorMapping mapping = mappings.get(key);
+    return mapping.getValue();
   }
 
   static class TurmitesColorMapping extends ColorModel {
 
     private final TurmitesRuleMetadata metadata;   
 
-    public TurmitesColorMapping(Map<Integer, Color> mapping, Color backgroundColor, Color frameColor, TurmitesRuleMetadata metadata) {
-      super(mapping, backgroundColor, frameColor);
+    public TurmitesColorMapping(Map<Integer, ColorMapping> mappings, Color backgroundColor, Color frameColor, TurmitesRuleMetadata metadata) {
+      super(mappings, backgroundColor, frameColor);
       this.metadata = metadata;
     }
 
