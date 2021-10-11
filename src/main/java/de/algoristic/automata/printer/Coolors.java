@@ -40,50 +40,66 @@ public class Coolors {
 
   public static class Sets {
     public static ColorSet colorful = new ColorSet(
-        charcoal,
-        persianGreen,
-        orangeYellowCrayola,
-        sandyBrown,
-        burntSienna);
+      charcoal,
+      persianGreen,
+      orangeYellowCrayola,
+      sandyBrown,
+      burntSienna);
     public static ColorSet shadesOfBlue = new ColorSet(
-        new Color(3, 4, 94),
-        new Color(2, 62, 138),
-        new Color(0, 119, 182),
-        new Color(0, 150, 199),
-        new Color(0, 180, 216),
-        new Color(72, 202, 228),
-        new Color(144, 224, 239),
-        new Color(173, 232, 244),
-        new Color(202, 240, 248));
+      new Color(3, 4, 94),
+      new Color(2, 62, 138),
+      new Color(0, 119, 182),
+      new Color(0, 150, 199),
+      new Color(0, 180, 216),
+      new Color(72, 202, 228),
+      new Color(144, 224, 239),
+      new Color(173, 232, 244),
+      new Color(202, 240, 248));
     public static ColorSet darkBlues = new ColorSet(
-        new Color(3, 4, 94),
-        new Color(2, 62, 138),
-        new Color(0, 119, 182),
-        new Color(0, 150, 199));
+      new Color(3, 4, 94),
+      new Color(2, 62, 138),
+      new Color(0, 119, 182),
+      new Color(0, 150, 199));
     public static ColorSet lightBlues = new ColorSet(
-        new Color(169, 214, 229),
-        new Color(137, 194, 217),
-        new Color(97, 165, 194),
-        new Color(70, 143, 175));
+      new Color(169, 214, 229),
+      new Color(137, 194, 217),
+      new Color(97, 165, 194),
+      new Color(70, 143, 175));
     public static ColorSet lightGrays = new ColorSet(
-        new Color(248, 249, 250),
-        new Color(233, 236, 239),
-        new Color(222, 226, 230));
+      new Color(248, 249, 250),
+      new Color(233, 236, 239),
+      new Color(222, 226, 230));
+    public static ColorSet darkGrays = new ColorSet(
+      new Color(0, 0, 0),
+      new Color(10, 10, 10),
+      new Color(20, 20, 20),
+      new Color(35, 43, 43),
+      new Color(42, 52, 57));
     public static ColorSet retroChic = new ColorSet(
-        imperialRed,
-        honeyDew,
-        powderBlue,
-        celadonBlue,
-        prussianBlue);
+      imperialRed,
+      honeyDew,
+      powderBlue,
+      celadonBlue,
+      prussianBlue);
     public static ColorSet lightRainbow = new ColorSet(
-        new Color(255, 173, 173),
-        new Color(255, 214, 165),
-        new Color(253, 255, 182),
-        new Color(202, 255, 191),
-        new Color(155, 246, 255),
-        new Color(160, 196, 255),
-        new Color(189, 178, 255),
-        new Color(255, 198, 255));
+      new Color(255, 173, 173),
+      new Color(255, 214, 165),
+      new Color(253, 255, 182),
+      new Color(202, 255, 191),
+      new Color(155, 246, 255),
+      new Color(160, 196, 255),
+      new Color(189, 178, 255),
+      new Color(255, 198, 255));
+    public static ColorSet arty = new ColorSet(
+      Coolors.imperialRed,
+      Coolors.celadonBlue,
+      Coolors.orangeWeb,
+      Coolors.orangeYellowCrayola,
+      Coolors.burntSienna,
+      Coolors.persianGreen,
+      Coolors.powderBlue,
+      Coolors.honeyDew,
+      Coolors.sandyBrown);
   }
 
   protected Color backgroundColor = Color.lightGray;

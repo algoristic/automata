@@ -12,9 +12,9 @@ import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
 
-public class ElementaryCAs_8BitStyle {
+public class ElementaryCAs_OnSteroids {
 
-  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/8-Bit Style");
+  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/On Steroids");
 
   @Automation
   void rule110() {
