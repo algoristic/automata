@@ -12,9 +12,9 @@ import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
 
-public class ElementaryCAs_Arty {
+public class ElementaryCAs_Experimental {
 
-  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/Arty Farty");
+  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/Arty Automata");
   List<Integer> rules = Arrays.asList(30, 54, 60, 90, 105, 106, 110, 122, 150);
 
   @Automation
@@ -35,8 +35,8 @@ public class ElementaryCAs_Arty {
           .buildElementaryPrinter();
         Automaton automaton = Automaton.Builder
           .wolframsUniverse(rule)
-          .chaotic(101)
-          .withRuntime(101)
+          .chaotic(75)
+          .withRuntime(75)
           .build();
         automaton.registerFinishAutomationListener(printer);
         automaton.run();
