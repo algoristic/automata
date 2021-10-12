@@ -30,7 +30,7 @@ public class ElementaryCAs_Maritime {
     Path target = destination.resolve("chaotic");
     ColorModel colors = new Coolors()
       .withMapping(BinaryState.DEAD, Coolors.black)
-      .withMapping(BinaryState.ALIVE, Coolors.Sets.colorful)
+      .withMapping(BinaryState.ALIVE, Coolors.Sets.maritime)
       .withBackground(Coolors.black)
       .withFrameColor(Coolors.black)
       .build();

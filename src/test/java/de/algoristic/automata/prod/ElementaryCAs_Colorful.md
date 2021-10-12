@@ -3,7 +3,7 @@ These are the 256 elementary cellular automata proposed by Stephen Wolfram. They
 
 These are the 256 elementary cellular automata proposed by Stephen Wolfram. They are computed with a single living cell as their initial configuration and live over 101 generations.
 
-Living cells are colored in `#E8E8E4`, dead cells and canvas in `#001219`.
+Living cells are colored in `#264653`, `#2A9D8F`, `#E9C46A`, `#F4A261` and `#EE6C4D`, dead cells and canvas in `#000000`.
 
 ## The beauty of cellular automata
 One of the questions that drove the invention of cellular automata was "What is the most simple set of rules that can lead to true complexity?"
