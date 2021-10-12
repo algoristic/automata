@@ -75,7 +75,7 @@ public class Coolors {
       new Color(20, 20, 20),
       new Color(35, 43, 43),
       new Color(42, 52, 57));
-    public static ColorSet retroChic = new ColorSet(
+    public static ColorSet maritime = new ColorSet(
       imperialRed,
       honeyDew,
       powderBlue,

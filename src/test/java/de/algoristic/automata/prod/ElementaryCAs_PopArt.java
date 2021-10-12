@@ -14,28 +14,28 @@ import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
 
-@DisplayName("Elementary CAs, displayed as simple as possible")
-public class ElementaryCAs_Classic {
+@DisplayName("Elementary CAs in some kind of Pop-Art fashion.")
+public class ElementaryCAs_PopArt {
 
-  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/Classic");
+  Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Elementary CAs/Arty Automata");
   List<Integer> rules = Arrays.asList(30, 54, 60, 90, 105, 106, 110, 122, 150);
 
   int cellSize = 8;
   int scaling = 2;
   int frameWidth = 8*20;
   int borderWidth = 2;
-  int size = 101;
+  int size = 75;
 
   @Automation
   @DisplayName("CAs with random initial configuration")
-  void chaotic() {
+  void chaoticSet() {
     Path target = destination.resolve("chaotic");
     IntStream.range(0, 256).forEach(rule -> {
       ColorModel colors = new Coolors()
-          .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
-          .withMapping(BinaryState.ALIVE, Coolors.platinum)
-          .withBackground(Coolors.richBlackFOGRA29)
-          .withFrameColor(Coolors.richBlackFOGRA29)
+          .withMapping(BinaryState.DEAD, Coolors.oxfordBlue)
+          .withMapping(BinaryState.ALIVE, Coolors.Sets.arty)
+          .withBackground(Coolors.oxfordBlue)
+          .withFrameColor(Coolors.oxfordBlue)
           .build();
         Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
           .withColorMapping(colors)
@@ -43,6 +43,7 @@ public class ElementaryCAs_Classic {
           .withScaling(scaling)
           .withFrameWidth(frameWidth)
           .withBorder(borderWidth)
+          .withFilename("chaotic")
           .buildElementaryPrinter();
         Automaton automaton = Automaton.Builder
           .wolframsUniverse(rule)
@@ -56,14 +57,14 @@ public class ElementaryCAs_Classic {
 
   @Automation
   @DisplayName("CAs with a single living cell as initial configuration")
-  void simple() {
+  void simpleSet() {
     Path target = destination.resolve("simple");
     IntStream.range(0, 256).forEach(rule -> {
       ColorModel colors = new Coolors()
-          .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
-          .withMapping(BinaryState.ALIVE, Coolors.platinum)
-          .withBackground(Coolors.richBlackFOGRA29)
-          .withFrameColor(Coolors.richBlackFOGRA29)
+          .withMapping(BinaryState.DEAD, Coolors.oxfordBlue)
+          .withMapping(BinaryState.ALIVE, Coolors.Sets.arty)
+          .withBackground(Coolors.oxfordBlue)
+          .withFrameColor(Coolors.oxfordBlue)
           .build();
         Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
           .withColorMapping(colors)
@@ -71,10 +72,11 @@ public class ElementaryCAs_Classic {
           .withScaling(scaling)
           .withFrameWidth(frameWidth)
           .withBorder(borderWidth)
+          .withFilename("simple")
           .buildElementaryPrinter();
         Automaton automaton = Automaton.Builder
           .wolframsUniverse(rule)
-          .simple(size)
+          .chaotic(size)
           .withRuntime(size)
           .build();
         automaton.registerFinishAutomationListener(printer);

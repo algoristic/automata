@@ -2,6 +2,7 @@ package de.algoristic.automata.prod;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import org.junit.jupiter.api.DisplayName;
 import de.algoristic.automata.Automaton;
 import de.algoristic.automata.core.BinaryState;
 import de.algoristic.automata.evolution.gameoflife.Rules;
@@ -14,9 +15,11 @@ import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
 
+@DisplayName("Generate some images for the opensea.io profile.")
 public class OpenSea {
 
   @Automation
+  @DisplayName("Generate Profile picture")
   void createProfile() {
     Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/opensea.io");
     Seed seed = new TemplateFile("src/test/resources/invader.txt");
@@ -43,6 +46,7 @@ public class OpenSea {
   }
 
   @Automation
+  @DisplayName("Generate banner picture")
   void createBanner() {
     Path destination = Paths.get("C:/Users/male233/.automata/opensea.io");
     ColorModel colors = new Coolors()
