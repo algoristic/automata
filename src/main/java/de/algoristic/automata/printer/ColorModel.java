@@ -29,6 +29,7 @@ public class ColorModel {
       .withMapping(2, Color.gray)
       .withMapping(3, Color.green)
       .withMapping(4, Color.cyan)
+      .withMapping(AntState.alive(metadata), Color.red)
       .build(metadata);
   }
 
@@ -85,7 +86,8 @@ public class ColorModel {
     @Override
     public Color get(State state) {
       if(AntState.isAlive(state, metadata)) {
-        return Color.red;
+        state = AntState.alive(metadata);
+        return super.get(state);
       }
       TurmiteState turmiteState = new TurmiteState(state);
       FieldState fieldState = new FieldState(turmiteState, metadata);
