@@ -25,12 +25,37 @@ public class ElementaryCAs_OnSteroids {
   int size = 75;
 
   @Automation
+  @DisplayName("Rule 18")
+  void rule18() {
+    ColorModel colors = new Coolors()
+      .withMapping(BinaryState.DEAD, new Color(41, 50, 65))
+      .withMapping(BinaryState.ALIVE, new Color(238, 108, 77))
+      .withBackground(new Color(41, 50, 65))
+      .withFrameColor(new Color(41, 50, 65))
+      .build();
+    ProdUtils.printColorModel(destination, "18_README.md", colors);
+    Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
+      .withColorMapping(colors)
+      .withCellSize(cellSize)
+      .withScaling(scaling)
+      .withFrameWidth(frameWidth)
+      .withBorder(borderWidth)
+      .buildElementaryPrinter();
+    Automaton automaton = Automaton.Builder
+      .wolframsUniverse(18)
+      .chaotic(size*2)
+      .withRuntime(size*2)
+      .build();
+    automaton.registerFinishAutomationListener(printer);
+    automaton.run();
+  }
+
+  @Automation
   @DisplayName("Rule 30")
   void rule30() {
     ColorModel colors = new Coolors()
       .withMapping(BinaryState.DEAD, Coolors.Sets.colorful.remove(Coolors.charcoal))
       .withMapping(BinaryState.ALIVE, Coolors.charcoal)
-      .withBackground(Coolors.charcoal)
       .withFrameColor(Coolors.charcoal)
       .build();
     ProdUtils.printColorModel(destination, "30_README.md", colors);
@@ -51,12 +76,36 @@ public class ElementaryCAs_OnSteroids {
   }
 
   @Automation
+  @DisplayName("Rule 90")
+  void rule90() {
+    ColorModel colors = new Coolors()
+      .withMapping(BinaryState.DEAD, Coolors.Sets.lightBlues)
+      .withMapping(BinaryState.ALIVE, Coolors.richBlackFOGRA29)
+      .withFrameColor(Coolors.richBlackFOGRA29)
+      .build();
+    ProdUtils.printColorModel(destination, "90_README.md", colors);
+    Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
+      .withColorMapping(colors)
+      .withCellSize(cellSize)
+      .withScaling(scaling)
+      .withFrameWidth(frameWidth)
+      .withBorder(borderWidth)
+      .buildElementaryPrinter();
+    Automaton automaton = Automaton.Builder
+      .wolframsUniverse(90)
+      .chaotic(size)
+      .withRuntime(size)
+      .build();
+    automaton.registerFinishAutomationListener(printer);
+    automaton.run();
+  }
+
+  @Automation
   @DisplayName("Rule 110")
   void rule110() {
     ColorModel colors = new Coolors()
       .withMapping(BinaryState.DEAD, Coolors.Sets.colorful.remove(Coolors.charcoal))
       .withMapping(BinaryState.ALIVE, Coolors.charcoal)
-      .withBackground(Coolors.platinum)
       .withFrameColor(Coolors.charcoal)
       .build();
     ProdUtils.printColorModel(destination, "110_README.md", colors);
@@ -85,7 +134,6 @@ public class ElementaryCAs_OnSteroids {
         new Color(233, 216, 166),
         Coolors.imperialRed))
       .withMapping(BinaryState.ALIVE, new Color(0, 18, 25))
-      .withBackground(Coolors.platinum)
       .withFrameColor(new Color(0, 18, 25))
       .build();
     ProdUtils.printColorModel(destination, "126_README.md", colors);
@@ -98,32 +146,6 @@ public class ElementaryCAs_OnSteroids {
       .buildElementaryPrinter();
     Automaton automaton = Automaton.Builder
       .wolframsUniverse(126)
-      .chaotic(size)
-      .withRuntime(size)
-      .build();
-    automaton.registerFinishAutomationListener(printer);
-    automaton.run();
-  }
-
-  @Automation
-  @DisplayName("Rule 90")
-  void rule90() {
-    ColorModel colors = new Coolors()
-      .withMapping(BinaryState.DEAD, Coolors.Sets.lightBlues)
-      .withMapping(BinaryState.ALIVE, Coolors.richBlackFOGRA29)
-      .withBackground(Coolors.platinum)
-      .withFrameColor(Coolors.richBlackFOGRA29)
-      .build();
-    ProdUtils.printColorModel(destination, "90_README.md", colors);
-    Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
-      .withColorMapping(colors)
-      .withCellSize(cellSize)
-      .withScaling(scaling)
-      .withFrameWidth(frameWidth)
-      .withBorder(borderWidth)
-      .buildElementaryPrinter();
-    Automaton automaton = Automaton.Builder
-      .wolframsUniverse(90)
       .chaotic(size)
       .withRuntime(size)
       .build();
