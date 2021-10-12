@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.nio.file.Path;
 import java.util.function.Consumer;
+import javax.imageio.ImageIO;
 import de.algoristic.automata.core.State;
 import de.algoristic.automata.evt.AutomatonEvent;
 import de.algoristic.automata.evt.AutomatonEventListener;
@@ -61,6 +62,14 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     this.callback.accept(file);
   }
 
+  protected int getFrameWidth() {
+    return frameWidth;
+  }
+
+  protected int getBorderWidth() {
+    return border;
+  }
+
   protected int calcStart(int n) {
     return ((n * size) + ((n + 1) * border) + frameWidth);
   }
@@ -77,6 +86,14 @@ public abstract class Printer<E extends AutomatonEvent> implements AutomatonEven
     BufferedImage image = Images.getColoredImage(widthInPixels, heightInPixels, backgroundColor);
     fillFrame(image);
     return image;
+  }
+
+  protected void printImage(BufferedImage image, File file) {
+    try {
+      ImageIO.write(image, format, file);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   private void fillFrame(BufferedImage image) {

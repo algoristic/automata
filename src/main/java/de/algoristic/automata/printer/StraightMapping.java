@@ -26,4 +26,8 @@ public class StraightMapping implements ColorMapping {
     return value;
   }
 
+  @Override
+  public String toString() {
+    return ColorUtils.toHex(value);
+  }
 }

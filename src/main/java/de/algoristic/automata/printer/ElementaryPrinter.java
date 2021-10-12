@@ -5,7 +5,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.util.List;
 import java.util.function.Consumer;
-import javax.imageio.ImageIO;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.State;
@@ -41,11 +40,7 @@ public class ElementaryPrinter extends Printer<FinishAutomationEvent> {
     String format = getFormat();
     Path imagePath = path.resolve(filename + "_rule_" + rule + "." + format);
     File imageFile = imagePath.toFile();
-    try {
-      ImageIO.write(image, format, imageFile);
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
+    printImage(image, imageFile);
   }
 
 }

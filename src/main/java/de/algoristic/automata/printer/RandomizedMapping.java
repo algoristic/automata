@@ -3,6 +3,7 @@ package de.algoristic.automata.printer;
 import java.awt.Color;
 import java.security.SecureRandom;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RandomizedMapping implements ColorMapping {
 
@@ -32,4 +33,10 @@ public class RandomizedMapping implements ColorMapping {
     return colors.get(index);
   }
 
+  @Override
+  public String toString() {
+    return colors.stream()
+      .map(ColorUtils::toHex)
+      .collect(Collectors.joining(", "));
+  }
 }

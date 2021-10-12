@@ -5,7 +5,6 @@ import java.io.File;
 import java.nio.file.Path;
 import java.text.MessageFormat;
 import java.util.function.Consumer;
-import javax.imageio.ImageIO;
 import de.algoristic.automata.core.Cell;
 import de.algoristic.automata.core.Generation;
 import de.algoristic.automata.core.State;
@@ -59,11 +58,7 @@ public class EvolutionStepPrinter extends Printer<FinishBreedingEvent> {
       String filename = MessageFormat.format("{0}_{1}_{2}.{3}", rule, name, paddedSteps, format);
       Path imagePath = path.resolve(filename);
       File imageFile = imagePath.toFile();
-      try {
-        ImageIO.write(image, format, imageFile);
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+      printImage(image, imageFile);
       callback(imageFile);
     }
   }

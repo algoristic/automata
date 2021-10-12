@@ -56,6 +56,23 @@ public class ColorModel {
     return mapping.getValue();
   }
 
+  @Override
+  public String toString() {
+    String indent = "  ";
+    StringBuffer buffer = new StringBuffer("ColorModel:\n");
+    buffer.append(indent).append("background: ").append(ColorUtils.toHex(backgroundColor)).append("\n");
+    buffer.append(indent).append("frame: ").append(ColorUtils.toHex(frameColor)).append("\n");
+    buffer.append(indent).append("mappings:\n");
+    for(Integer state : mappings.keySet()) {
+      buffer.append(indent);
+      buffer.append(indent);
+      buffer.append("state: ").append(state).append(" => ");
+      buffer.append(mappings.get(state));
+      buffer.append("\n");
+    }
+    return buffer.toString();
+  }
+
   static class TurmitesColorMapping extends ColorModel {
 
     private final TurmitesRuleMetadata metadata;   

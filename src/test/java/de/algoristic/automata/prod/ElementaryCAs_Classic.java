@@ -13,6 +13,7 @@ import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
+import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Elementary CAs, displayed as simple as possible")
 public class ElementaryCAs_Classic {
@@ -30,27 +31,28 @@ public class ElementaryCAs_Classic {
   @DisplayName("CAs with random initial configuration")
   void chaotic() {
     Path target = destination.resolve("chaotic");
+    ColorModel colors = new Coolors()
+      .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
+      .withMapping(BinaryState.ALIVE, Coolors.platinum)
+      .withBackground(Coolors.richBlackFOGRA29)
+      .withFrameColor(Coolors.richBlackFOGRA29)
+      .build();
+    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
-      ColorModel colors = new Coolors()
-          .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
-          .withMapping(BinaryState.ALIVE, Coolors.platinum)
-          .withBackground(Coolors.richBlackFOGRA29)
-          .withFrameColor(Coolors.richBlackFOGRA29)
-          .build();
-        Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
-          .withColorMapping(colors)
-          .withCellSize(cellSize)
-          .withScaling(scaling)
-          .withFrameWidth(frameWidth)
-          .withBorder(borderWidth)
-          .buildElementaryPrinter();
-        Automaton automaton = Automaton.Builder
-          .wolframsUniverse(rule)
-          .chaotic(size)
-          .withRuntime(size)
-          .build();
-        automaton.registerFinishAutomationListener(printer);
-        automaton.run();
+      Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
+        .withColorMapping(colors)
+        .withCellSize(cellSize)
+        .withScaling(scaling)
+        .withFrameWidth(frameWidth)
+        .withBorder(borderWidth)
+        .buildElementaryPrinter();
+      Automaton automaton = Automaton.Builder
+        .wolframsUniverse(rule)
+        .chaotic(size)
+        .withRuntime(size)
+        .build();
+      automaton.registerFinishAutomationListener(printer);
+      automaton.run();
     });
   }
 
@@ -58,27 +60,28 @@ public class ElementaryCAs_Classic {
   @DisplayName("CAs with a single living cell as initial configuration")
   void simple() {
     Path target = destination.resolve("simple");
+    ColorModel colors = new Coolors()
+      .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
+      .withMapping(BinaryState.ALIVE, Coolors.platinum)
+      .withBackground(Coolors.richBlackFOGRA29)
+      .withFrameColor(Coolors.richBlackFOGRA29)
+      .build();
+    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
-      ColorModel colors = new Coolors()
-          .withMapping(BinaryState.DEAD, Coolors.richBlackFOGRA29)
-          .withMapping(BinaryState.ALIVE, Coolors.platinum)
-          .withBackground(Coolors.richBlackFOGRA29)
-          .withFrameColor(Coolors.richBlackFOGRA29)
-          .build();
-        Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
-          .withColorMapping(colors)
-          .withCellSize(cellSize)
-          .withScaling(scaling)
-          .withFrameWidth(frameWidth)
-          .withBorder(borderWidth)
-          .buildElementaryPrinter();
-        Automaton automaton = Automaton.Builder
-          .wolframsUniverse(rule)
-          .simple(size)
-          .withRuntime(size)
-          .build();
-        automaton.registerFinishAutomationListener(printer);
-        automaton.run();
+      Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
+        .withColorMapping(colors)
+        .withCellSize(cellSize)
+        .withScaling(scaling)
+        .withFrameWidth(frameWidth)
+        .withBorder(borderWidth)
+        .buildElementaryPrinter();
+      Automaton automaton = Automaton.Builder
+        .wolframsUniverse(rule)
+        .simple(size)
+        .withRuntime(size)
+        .build();
+      automaton.registerFinishAutomationListener(printer);
+      automaton.run();
     });
   }
 }
