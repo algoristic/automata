@@ -12,6 +12,10 @@ The `automata` project offers a generic approach to simulate various cellular au
 ### XOR-Gate in Wireworld
 ![XOR-Gate](./doc/wirworld_xor.gif)
 
+### Langton's Ant with a modified rule of LLRR
+...after a simulation of 150.000 steps.
+![Langton's Ants](./doc/llrr.gif)
+
 ### A more advanced approach to the Rule 110
 ![Advanced Rule 110](./doc/chaotic_rule_110.gif)
 
