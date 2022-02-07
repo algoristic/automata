@@ -1,6 +1,22 @@
 # automata
+The `automata` project offers a generic approach to simulate various cellular automata. My purpose was to have a flexible platform to experimtent with CAs, so one can hook into several points of the simulation an monitor the process. A side effect of this was that the project now offers the possibility of printing the CAs in a variety of ways.
 
-## Examples
+## Image results
+
+### A simple print of the Rule 110 by Stephen Wolfram
+![Simple Rule 110](./doc/cellular-automaton_110.gif)
+
+### Gosper glider gun in Conway's Game of Life
+![Gosper glider gun](./doc/gosperglidergun.gif)
+
+### XOR-Gate in Wireworld
+![XOR-Gate](./doc/wirworld_xor.gif)
+
+### A more advanced approach to the Rule 110
+![Advanced Rule 110](./doc/chaotic_rule_110.gif)
+
+
+## Code Examples
 
 ### Elementary Cellular Automata
 See classes under `src/test` `de.algoristic.automata.evolution` for further exaples.
@@ -90,17 +106,3 @@ IntStream.range(0, 256).forEach(rule -> {
   automaton.run();
 });
 ```
-
-### Some image results
-
-#### A simple print of the Rule 110 by Stephen Wolfram
-![Simple Rule 110](./doc/cellular-automaton_110.gif)
-
-### Gosper glider gun in Conway's Game of Life
-![Gosper glider gun](./doc/gosperglidergun.gif)
-
-### XOR-Gate in Wireworld
-![XOR-Gate](./doc/wirworld_xor.gif)
-
-### A more advanced approach to the Rule 110
-![Advanced Rule 110](./doc/chaotic_rule_110.gif)
