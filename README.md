@@ -100,7 +100,7 @@ IntStream.range(0, 256).forEach(rule -> {
 ![Gosper glider gun](./doc/gosperglidergun.gif)
 
 ### XOR-Gate in Wireworld
-![XOR-Gate](./doc/wireworld_xor.gif)
+![XOR-Gate](./doc/wirworld_xor.gif)
 
 ### A more advanced approach to the Rule 110
 ![Advanced Rule 110](./doc/chaotic_rule_110.gif)
