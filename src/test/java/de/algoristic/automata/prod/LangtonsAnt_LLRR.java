@@ -16,7 +16,6 @@ import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.LifeCyclePrinter;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
-import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Langton's ant with a rule of LLRR")
 public class LangtonsAnt_LLRR {
@@ -26,10 +25,10 @@ public class LangtonsAnt_LLRR {
   int runtime = 250000;
 
   @Automation
-  @DisplayName("Computing")
-  void llrr() {
-    Turmites llrr = Rules.LLRR.get();
-    TurmitesRuleMetadata metadata = llrr.getMetadata();
+  @DisplayName("Computing...")
+  void compute() {
+    Turmites rule = Rules.LLRR.get();
+    TurmitesRuleMetadata metadata = rule.getMetadata();
     Seed seed = new AntSeed(65);
     ColorModel colors = new Coolors()
       .withMapping(0, Coolors.oxfordBlue)
@@ -40,7 +39,6 @@ public class LangtonsAnt_LLRR {
       .withBackground(Coolors.black)
       .withFrameColor(Coolors.black)
       .build(metadata);
-    ProdUtils.printColorModel(destination, colors);
     Path out = destination.resolve("LLRR.gif");
     LifeCyclePrinter printer = new LifeCyclePrinter(out);
     Printer<FinishBreedingEvent> automationStepPrinter = new Printer
@@ -50,7 +48,7 @@ public class LangtonsAnt_LLRR {
       .withColorMapping(colors)
       .buildEvolutionStepPrinter(10000);
     Automaton automaton = Automaton.Builder
-      .turmites(llrr)
+      .turmites(rule)
       .withSeed(seed)
       .withRuntime(runtime)
       .build();
@@ -58,5 +56,4 @@ public class LangtonsAnt_LLRR {
     automaton.run();
     printer.print(false, 25);
   }
-  
 }

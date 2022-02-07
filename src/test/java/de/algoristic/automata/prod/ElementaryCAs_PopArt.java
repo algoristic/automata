@@ -13,7 +13,6 @@ import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
-import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Elementary CAs in some kind of Pop-Art fashion.")
 public class ElementaryCAs_PopArt {
@@ -37,7 +36,6 @@ public class ElementaryCAs_PopArt {
       .withBackground(Coolors.oxfordBlue)
       .withFrameColor(Coolors.oxfordBlue)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)
@@ -67,7 +65,6 @@ public class ElementaryCAs_PopArt {
       .withBackground(Coolors.oxfordBlue)
       .withFrameColor(Coolors.oxfordBlue)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)
@@ -79,7 +76,7 @@ public class ElementaryCAs_PopArt {
         .buildElementaryPrinter();
       Automaton automaton = Automaton.Builder
         .wolframsUniverse(rule)
-        .chaotic(size)
+        .simple(size)
         .withRuntime(size)
         .build();
       automaton.registerFinishAutomationListener(printer);

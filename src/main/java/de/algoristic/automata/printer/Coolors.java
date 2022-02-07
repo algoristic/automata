@@ -121,6 +121,11 @@ public class Coolors {
     return withMapping(mapping);
   }
 
+  public Coolors withMapping(Integer key, ColorSet colorSet) {
+    ColorMapping mapping = new RandomizedMapping(key, colorSet);
+    return withMapping(mapping);
+  }
+
   public Coolors withMapping(State state, Color value) {
     Integer key = state.getValue();
     return withMapping(key, value);

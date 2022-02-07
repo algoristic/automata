@@ -11,7 +11,6 @@ import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
-import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Elementary CAs displayed with a beautiful color-mix")
 public class ElementaryCAs_Colorful {
@@ -34,7 +33,6 @@ public class ElementaryCAs_Colorful {
       .withBackground(Coolors.black)
       .withFrameColor(Coolors.black)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)
@@ -56,14 +54,13 @@ public class ElementaryCAs_Colorful {
   @Automation
   @DisplayName("CAs with a single living cell as initial configuration")
   void simple() {
-    Path target = destination.resolve("chaotic");
+    Path target = destination.resolve("simple");
     ColorModel colors = new Coolors()
       .withMapping(BinaryState.DEAD, Coolors.black)
       .withMapping(BinaryState.ALIVE, Coolors.Sets.colorful)
       .withBackground(Coolors.black)
       .withFrameColor(Coolors.black)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)

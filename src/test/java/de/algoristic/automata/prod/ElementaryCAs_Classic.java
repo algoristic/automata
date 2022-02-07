@@ -13,7 +13,6 @@ import de.algoristic.automata.printer.ColorModel;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
-import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Elementary CAs, displayed as simple as possible")
 public class ElementaryCAs_Classic {
@@ -37,7 +36,6 @@ public class ElementaryCAs_Classic {
       .withBackground(Coolors.richBlackFOGRA29)
       .withFrameColor(Coolors.richBlackFOGRA29)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)
@@ -66,7 +64,6 @@ public class ElementaryCAs_Classic {
       .withBackground(Coolors.richBlackFOGRA29)
       .withFrameColor(Coolors.richBlackFOGRA29)
       .build();
-    ProdUtils.printColorModel(target, colors);
     IntStream.range(0, 256).forEach(rule -> {
       Printer<FinishAutomationEvent> printer = new Printer.Builder(target)
         .withColorMapping(colors)

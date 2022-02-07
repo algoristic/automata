@@ -12,7 +12,6 @@ import de.algoristic.automata.printer.ColorSet;
 import de.algoristic.automata.printer.Coolors;
 import de.algoristic.automata.printer.Printer;
 import de.algoristic.automata.prod.util.Automation;
-import de.algoristic.automata.prod.util.ProdUtils;
 
 @DisplayName("Elementary CAs completely on steroids")
 public class ElementaryCAs_OnSteroids {
@@ -33,7 +32,6 @@ public class ElementaryCAs_OnSteroids {
       .withBackground(new Color(41, 50, 65))
       .withFrameColor(new Color(41, 50, 65))
       .build();
-    ProdUtils.printColorModel(destination, "18_README.md", colors);
     Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
       .withColorMapping(colors)
       .withCellSize(cellSize)
@@ -58,7 +56,6 @@ public class ElementaryCAs_OnSteroids {
       .withMapping(BinaryState.ALIVE, Coolors.charcoal)
       .withFrameColor(Coolors.charcoal)
       .build();
-    ProdUtils.printColorModel(destination, "30_README.md", colors);
     Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
       .withColorMapping(colors)
       .withCellSize(cellSize)
@@ -83,7 +80,6 @@ public class ElementaryCAs_OnSteroids {
       .withMapping(BinaryState.ALIVE, Coolors.richBlackFOGRA29)
       .withFrameColor(Coolors.richBlackFOGRA29)
       .build();
-    ProdUtils.printColorModel(destination, "90_README.md", colors);
     Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
       .withColorMapping(colors)
       .withCellSize(cellSize)
@@ -108,7 +104,6 @@ public class ElementaryCAs_OnSteroids {
       .withMapping(BinaryState.ALIVE, Coolors.charcoal)
       .withFrameColor(Coolors.charcoal)
       .build();
-    ProdUtils.printColorModel(destination, "110_README.md", colors);
     Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
       .withColorMapping(colors)
       .withCellSize(cellSize)
@@ -136,7 +131,6 @@ public class ElementaryCAs_OnSteroids {
       .withMapping(BinaryState.ALIVE, new Color(0, 18, 25))
       .withFrameColor(new Color(0, 18, 25))
       .build();
-    ProdUtils.printColorModel(destination, "126_README.md", colors);
     Printer<FinishAutomationEvent> printer = new Printer.Builder(destination)
       .withColorMapping(colors)
       .withCellSize(cellSize)
