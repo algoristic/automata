@@ -22,7 +22,7 @@ public class LangtonsAnt_LLRR {
 
   Path destination = Paths.get("C:/Users/male233/Documents/MEGA/Bilder/automata/Langtons ant/LLRR");
 
-  int runtime = 250000;
+  int runtime = 150000;
 
   @Automation
   @DisplayName("Computing...")
@@ -46,7 +46,7 @@ public class LangtonsAnt_LLRR {
       .withCallback(printer::addFile)
       .withFrameWidth(0)
       .withColorMapping(colors)
-      .buildEvolutionStepPrinter(10000);
+      .buildEvolutionStepPrinter(1000);
     Automaton automaton = Automaton.Builder
       .turmites(rule)
       .withSeed(seed)
@@ -54,6 +54,6 @@ public class LangtonsAnt_LLRR {
       .build();
     automaton.registerFinishBreedingListener(automationStepPrinter);
     automaton.run();
-    printer.print(false, 25);
+    printer.print(false, 50);
   }
 }
